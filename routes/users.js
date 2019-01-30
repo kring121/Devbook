@@ -1,13 +1,10 @@
 var express = require('express');
-var router = express.Router();
+const users = require('../controllers/userController');
+const views    = require('../controllers/viewController');
 
+const userRouter = express.Router();
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.json([
-    {id: 1, username: 'kring121'},
-    {id: 2, username: 'judybear'},
-    {id: 3, username: 'lillybus'},
-  ]);
-});
+userRouter.route('/')
+  .get(users.index, views.showUsers);
 
-module.exports = router;
+module.exports = userRouter;

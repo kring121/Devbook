@@ -1,0 +1,10 @@
+#!/usr/bin/env node
+
+const {db, User} = require('../models');
+const {users} = require('../data');
+
+
+(async () => {
+  await User.bulkCreate(users.map(([id, username, name]) => ({id, username, name})));
+  db.close();
+})();

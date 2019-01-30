@@ -5,7 +5,10 @@
   "scripts": {
     "start": "node app.js",
     "heroku-postbuild": "cd client && yarn && yarn build",
-    "dev": "nodemon"
+    "dev": "nodemon",
+    "db:init": "dropdb --if-exists fullstack-app && createdb fullstack-app",
+    "db:reset": "./scripts/resetDB",
+    "db:seed": "./scripts/seedDB"
   },
   "dependencies": {
     "concurrently": "^4.1.0",
@@ -14,7 +17,9 @@
     "express": "~4.16.0",
     "http-errors": "~1.6.2",
     "jade": "~1.11.0",
-    "morgan": "~1.9.0"
+    "morgan": "~1.9.0",
+    "pg": "^7.8.0",
+    "sequelize": "^4.42.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"
