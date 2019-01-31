@@ -1,25 +1,21 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Users from './Users';
+import UserProfile from './UserProfile';
+import CreateUser from './CreateUser';
 
 class App extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-      users: [],
-    }
-  }
-  componentDidMount(){
-    fetch('/users')
-      .then(res => res.json())
-      .then(users => this.setState({users: users.users}));
-  }
   render() {
-    const { users } = this.state;
     return (
-      <div className="App">
-        <ul>
-          {users.map(user => <li key={user.id}>{user.username}</li>)}
-        </ul>
-      </div>
+      <BrowserRouter>
+        <div className="App">
+          <Switch>
+            <Route exact path='/users' component={Users}/>
+            <Route exact path='/create/user' component={CreateUser}/>
+            <Route exact path='/users/:userId' component={UserProfile}/>
+          </Switch>
+        </div>
+      </BrowserRouter>
     );
   }
 }

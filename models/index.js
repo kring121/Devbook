@@ -14,6 +14,7 @@ const User = db.define('user', {
     type: Sequelize.INTEGER,
     allowNull: false,
     primaryKey: true,
+    autoIncrement: true,
     unique: true,
   },
   username: {
