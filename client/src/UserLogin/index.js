@@ -2,24 +2,25 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
 
-class CreateUsers extends Component {
+class UserLogin extends Component {
   constructor(props){
     super(props);
     this.state = {
       fireRedirect: false,
     }
-    this.createUser = this.createUser.bind(this);
+    this.loginUser = this.loginUser.bind(this);
   }
 
-  createUser(e) {
+  loginUser(e) {
     e.preventDefault();
     const username = this.refs.username.value;
-    const nameOfUser = this.refs.name.value;
+    const password = this.refs.password.value;
 
-    axios.post('/users', {
+    axios.post('/users/login', {
         username: username,
-        name: nameOfUser
+        password: password
       })
+      .then((res) => sessionStorage.setItem('jwttoken', res.data.token))
       .then(() => {
         this.setState({ fireRedirect: true });
       })
@@ -34,12 +35,12 @@ class CreateUsers extends Component {
       return <Redirect to='/users'/>
     }
     return (
-      <div className="create-user">
-        <form onSubmit={this.createUser}>
+      <div className="user-login">
+        <form onSubmit={this.loginUser}>
           <label>Username</label>
           <input ref='username' type='' placeholder=''></input>
-          <label>Name</label>
-          <input ref='name' type='' placeholder=''></input>
+          <label>Password</label>
+          <input ref='password' type='password' placeholder=''></input>
           <button type='submit'>Submit</button>
         </form>
       </div>
@@ -47,4 +48,4 @@ class CreateUsers extends Component {
   }
 }
 
-export default CreateUsers;
+export default UserLogin;

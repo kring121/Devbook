@@ -10,9 +10,8 @@ class Users extends Component {
     }
   }
   componentDidMount(){
-    // fetch('/users')
-    //   .then(res => res.json())
-    //   .then(users => this.setState({users: users}));
+    const token = sessionStorage.getItem('jwttoken');
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
     axios.get('/users')
       .then(res => res.data)
       .then(users => this.setState({users: users}));
@@ -22,7 +21,7 @@ class Users extends Component {
     return (
       <div className="users">
         <ul>
-          {users.map(user => <Link to={/users/+user.id}><li key={user.id}>{user.username}</li></Link>)}
+          {users.map(user => <Link to={/users/+user.id} key={'linkto'+ user.id}><li key={user.id}>{user.username}</li></Link>)}
           <Link to='/create/user'><li>Add New User</li></Link>
         </ul>
 

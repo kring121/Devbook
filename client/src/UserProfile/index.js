@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import axios from 'axios';
 class UserProfile extends Component {
   constructor(props){
     super(props);
@@ -9,8 +9,10 @@ class UserProfile extends Component {
   }
   componentDidMount(){
     const { userId } = this.props.match.params
-    fetch(`/users/${ userId }`)
-      .then(res => res.json())
+    const token = sessionStorage.getItem('jwttoken');
+    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    axios.get('/users/'+ userId)
+      .then(res => res.data)
       .then(user => this.setState({user: user}));
   }
   render() {

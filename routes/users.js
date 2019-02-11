@@ -1,14 +1,17 @@
-var express = require('express');
+const express = require('express');
 const users = require('../controllers/userController');
 const views    = require('../controllers/viewController');
 
 const userRouter = express.Router();
 /* GET users listing. */
 userRouter.route('/')
-  .get(users.index, views.showUsers)
+  .get(users.verifyToken, users.index, views.showUsers)
   .post(users.create, views.showUsers)
 
 userRouter.route('/:id')
-  .get(users.getOne, views.showUser);
+  .get(users.verifyToken, users.getOne, views.showUser);
+
+userRouter.route('/login')
+  .post(users.login, views.showUser);
 
 module.exports = userRouter;

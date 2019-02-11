@@ -5,6 +5,6 @@ const {users} = require('../data');
 
 
 (async () => {
-  await User.bulkCreate(users.map(([id, username, name]) => ({id, username, name})));
+  await User.bulkCreate(users.map(([username, name, password, email]) => ({username, name, password, email})));
   db.close();
 })();
