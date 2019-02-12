@@ -9,5 +9,9 @@ module.exports = {
 
   showPosts(req, res) {
     res.send(res.locals);
+  },
+
+  showComments(req, res) {
+    res.send(res.locals);
   }
 }

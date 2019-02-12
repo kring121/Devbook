@@ -55,15 +55,53 @@ const Post = db.define('post', {
     type: Sequelize.TEXT,
     allowNull: true,
   }
-})
+});
+
+const Comment = db.define('comment', {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true,
+  },
+  content: {
+    type: Sequelize.STRING(140),
+    allowNull: false,
+  }
+});
+
+const Like = db.define('like', {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true,
+  },
+});
 
 //associations
 
 User.hasMany(Post);
 Post.belongsTo(User);
 
+User.hasMany(Comment);
+Comment.belongsTo(User);
+
+User.hasMany(Like);
+Like.belongsTo(User);
+
+Post.hasMany(Comment);
+Comment.belongsTo(Post);
+
+Post.hasMany(Like);
+Like.belongsTo(Post);
+
 module.exports = {
   db,
   User,
-  Post
+  Post,
+  Comment,
+  Like
 }

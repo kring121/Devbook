@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 // import { Link, Redirect } from 'react-router-dom';
 import axios from 'axios';
-// import ReactS3 from 'react-s3';
 import S3FileUpload from 'react-s3';
+import * as auth from '../AuthFunctions';
 
 class CreatePost extends Component {
   constructor(props){
@@ -13,8 +13,7 @@ class CreatePost extends Component {
   }
 
   componentDidMount() {
-    const token = sessionStorage.getItem('jwttoken');
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    auth.setHeader();
   }
   createPost(e) {
     const config = {

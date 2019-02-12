@@ -1,6 +1,16 @@
 const { User, Post } = require('../models');
 
 module.exports = {
+  async index(req, res, next) {
+    try {
+      res.locals = await Post.findAll({
+        rejectOnEmpty: true,
+      });
+      next()
+    } catch(e) {
+      next(e);
+    }
+  },
   async create(req, res, next) {
     try {
       const { image, caption } = req.body;

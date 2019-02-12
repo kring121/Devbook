@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import * as auth from '../AuthFunctions';
+
 class UserProfile extends Component {
   constructor(props){
     super(props);
@@ -9,8 +11,7 @@ class UserProfile extends Component {
   }
   componentDidMount(){
     const { userId } = this.props.match.params
-    const token = sessionStorage.getItem('jwttoken');
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    auth.setHeader();
     axios.get('/users/'+ userId)
       .then(res => res.data)
       .then(user => this.setState({user: user}));

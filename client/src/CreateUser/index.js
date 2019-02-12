@@ -15,16 +15,20 @@ class CreateUsers extends Component {
     e.preventDefault();
     const username = this.refs.username.value;
     const nameOfUser = this.refs.name.value;
+    const password = this.refs.password.value;
+    const email = this.refs.email.value;
 
     axios.post('/users', {
         username: username,
-        name: nameOfUser
+        name: nameOfUser,
+        email: email,
+        password: password,
       })
       .then(() => {
         this.setState({ fireRedirect: true });
       })
       .catch((error) => {
-        console.log(error);
+        console.log(error.response.data);
       });
   }
 
@@ -37,9 +41,13 @@ class CreateUsers extends Component {
       <div className="create-user">
         <form onSubmit={this.createUser}>
           <label>Username</label>
-          <input ref='username' type='' placeholder=''></input>
+          <input ref='username'></input>
           <label>Name</label>
-          <input ref='name' type='' placeholder=''></input>
+          <input ref='name'></input>
+          <label>Email</label>
+          <input ref='email' type='email'></input>
+          <label>Password</label>
+          <input ref='password' type='password'></input>
           <button type='submit'>Submit</button>
         </form>
       </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import * as auth from '../AuthFunctions';
 
 class Users extends Component {
   constructor(props){
@@ -10,8 +11,7 @@ class Users extends Component {
     }
   }
   componentDidMount(){
-    const token = sessionStorage.getItem('jwttoken');
-    axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
+    auth.setHeader();
     axios.get('/users')
       .then(res => res.data)
       .then(users => this.setState({users: users}));
