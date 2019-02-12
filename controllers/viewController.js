@@ -13,5 +13,9 @@ module.exports = {
 
   showComments(req, res) {
     res.send(res.locals);
+  },
+
+  showLikes(req, res) {
+    res.send(res.locals);
   }
 }

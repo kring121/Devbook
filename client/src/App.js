@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import axios from 'axios';
 import UserLogin from './UserLogin';
 import Users from './Users';
+import Posts from './Posts';
 import UserProfile from './UserProfile';
 import CreateUser from './CreateUser';
 import CreatePost from './CreatePost';
@@ -17,6 +18,7 @@ class App extends Component {
             <Route exact path='/users' component={Users}/>
             <Route exact path='/create/user' component={CreateUser}/>
             <Route exact path='/users/:userId' component={UserProfile}/>
+            <Route exact path='/posts' component={Posts}/>
             <Route exact path='/create/post' component={CreatePost}/>
           </Switch>
         </div>
