@@ -1,0 +1,43 @@
+#navbar {
+  background: hsl(204, 86%, 53%);
+}
+
+#dev {
+  font-size: 40px;
+  color: white;
+  /*margin-right: 100px;*/
+}
+
+#user-circle {
+  font-size: 30px;
+  color: white;
+}
+
+#search {
+  color: white;
+}
+
+.navbar-link {
+  background: red;
+}
+
+.navbar-link:hover {
+  background: transparent;
+}
+
+#nav-user {
+  /*display: flex;*/
+  align-items: center;
+}
+
+#nav-user:hover {
+  background: red;
+}
+
+#nav-dropdown::after {
+  border-color: white;
+}
+
+#nav-dropdown:hover {
+  background: transparent;
+}

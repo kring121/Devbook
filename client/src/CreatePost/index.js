@@ -5,6 +5,7 @@ import * as auth from '../AuthFunctions';
 import ImagePost from '../ImagePost';
 import LinkPost from '../LinkPost';
 import './style.css';
+import { Button } from 'bloomer';
 
 class CreatePost extends Component {
   constructor(props){
@@ -32,7 +33,7 @@ class CreatePost extends Component {
     const { imgOrLink } = this.state;
     return (
       <div className="create-post">
-        <button onClick={this.toggleSelection}>{ imgOrLink === 'img' ? 'Link' : 'Image'}</button>
+        <Button isColor='success' onClick={this.toggleSelection}>{ imgOrLink === 'img' ? 'Link' : 'Image'}</Button>
         { imgOrLink === 'img' ? <ImagePost/> : <LinkPost/>}
       </div>
     );

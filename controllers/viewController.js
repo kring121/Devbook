@@ -17,5 +17,9 @@ module.exports = {
 
   showLikes(req, res) {
     res.send(res.locals);
+  },
+
+  currentUser(req, res) {
+    res.send(res.locals);
   }
 }

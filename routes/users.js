@@ -6,7 +6,7 @@ const userRouter = express.Router();
 /* GET users listing. */
 userRouter.route('/')
   .get(users.verifyToken, users.index, views.showUsers)
-  .post(users.create, views.showUsers)
+  .post(users.create, views.showUsers);
 
 userRouter.route('/:id')
   .get(users.verifyToken, users.getOne, views.showUser);
