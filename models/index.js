@@ -54,6 +54,14 @@ const Post = db.define('post', {
   caption: {
     type: Sequelize.TEXT,
     allowNull: true,
+  },
+  link: {
+    type: Sequelize.STRING(128),
+    allowNull: true
+  },
+  github: {
+    type: Sequelize.STRING(128),
+    allowNull: true
   }
 });
 

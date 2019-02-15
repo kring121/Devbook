@@ -13,11 +13,11 @@ module.exports = {
   },
   async create(req, res, next) {
     try {
-      const { image, caption } = req.body;
+      const { image, caption, link, github } = req.body;
       const user_id = req.userId;
 
       const newPost = await Post.create({
-        image, caption, user_id
+        image, caption, user_id, link, github
       })
 
       res.locals = newPost;

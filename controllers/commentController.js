@@ -33,7 +33,7 @@ module.exports = {
       const post_id = Number.parseInt(req.params.id, 10);
       res.locals = await Comment.findAll({
         where: { post_id },
-        rejectOnEmpty: true,
+        // rejectOnEmpty: true,
         include: [{model: User, attributes: ['id', 'username']}]
       });
       next();
