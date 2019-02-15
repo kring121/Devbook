@@ -1,0 +1,9 @@
+canvas {
+  max-width: 300px;
+  min-width: 300px;
+}
+
+img {
+  /*width: 30%;*/
+  height: auto;
+}

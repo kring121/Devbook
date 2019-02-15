@@ -6,6 +6,7 @@ import ReactCrop from 'react-image-crop';
 import * as auth from '../AuthFunctions';
 import { image64toCanvasRef, base64StringtoFile, extractImageFileExtensionFromBase64, downloadBase64File } from '../ImageHandlingFunctions';
 import 'react-image-crop/dist/ReactCrop.css';
+import './style.css';
 
 class CreatePost extends Component {
   constructor(props){
@@ -57,7 +58,6 @@ class CreatePost extends Component {
   }
 
   previewImage(e){
-    console.log(e.target.files)
     const file = e.target.files[0];
     const reader = new FileReader()
     reader.addEventListener('load', () => {
@@ -94,7 +94,6 @@ class CreatePost extends Component {
 
 
     const croppedImage = base64StringtoFile(imgData64, fileName);
-    console.log(croppedImage)
     this.setState({croppedImage: croppedImage});
 
     let oldFile = this.fileRef.current.files[0]
@@ -105,7 +104,7 @@ class CreatePost extends Component {
     const canvas = this.imagePreviewCanvasRef.current;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    this.setState({imgPreviewSrc: ''});
+    this.setState({imgPreviewSrc: null});
   }
 
   render() {
