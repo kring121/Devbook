@@ -16,7 +16,8 @@ class CreatePost extends Component {
       imgPreviewSrc: null,
       crop: {
         aspect: 1/1,
-      }
+      },
+      croppedImage: null,
     }
     this.createPost = this.createPost.bind(this);
     this.previewImage = this.previewImage.bind(this);
@@ -40,7 +41,8 @@ class CreatePost extends Component {
     }
     e.preventDefault();
     e.persist();
-    const file = e.target[0].files[0];
+    // const file = e.target[0].files[0];
+    const file = this.state.croppedImage;
     const caption = this.refs.caption.value;
 
     S3FileUpload
@@ -55,10 +57,8 @@ class CreatePost extends Component {
   }
 
   previewImage(e){
-    // console.log('Im changin')
     console.log(e.target.files)
     const file = e.target.files[0];
-    // console.log(file);
     const reader = new FileReader()
     reader.addEventListener('load', () => {
       this.setState({
@@ -74,15 +74,12 @@ class CreatePost extends Component {
   }
 
   handleImageLoaded(image){
-    // console.log(image)
   }
 
   handleCropComplete(crop, pixelCrop){
-    // console.log(crop, pixelCrop)
     const canvasRef = this.imagePreviewCanvasRef.current;
     const {imgPreviewSrc} = this.state;
     image64toCanvasRef(canvasRef, imgPreviewSrc, pixelCrop);
-    console.log(canvasRef)
   }
 
   handleCropSave(e){
@@ -98,12 +95,10 @@ class CreatePost extends Component {
 
     const croppedImage = base64StringtoFile(imgData64, fileName);
     console.log(croppedImage)
+    this.setState({croppedImage: croppedImage});
 
-    const newFile = downloadBase64File(imgData64, fileName)
     let oldFile = this.fileRef.current.files[0]
-    oldFile = newFile;
     this.handleClearToDefault()
-    // this.refs.file.value = croppedImage;
   }
 
   handleClearToDefault(e){
