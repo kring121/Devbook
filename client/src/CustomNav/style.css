@@ -2,6 +2,11 @@
   background: hsl(204, 86%, 53%);
 }
 
+.navbar-brand {
+  /*background: red;*/
+  justify-content: space-between;
+}
+
 #dev {
   font-size: 40px;
   color: white;
@@ -16,28 +21,36 @@
 #search {
   color: white;
 }
-
-.navbar-link {
-  background: red;
-}
-
-.navbar-link:hover {
-  background: transparent;
-}
-
 #nav-user {
   /*display: flex;*/
   align-items: center;
+  /*background: red;*/
 }
 
-#nav-user:hover {
-  background: red;
+.navbar-link {
+  color: white;
+}
+
+#nav-dropdown {
+  color: white;
+  font-weight: 600;
+}
+
+#nav-user:hover #nav-dropdown {
+  background: transparent;
 }
 
 #nav-dropdown::after {
   border-color: white;
+  transition: 0.2s ease-in-out;
+  transform-origin: 30%;
 }
 
-#nav-dropdown:hover {
-  background: transparent;
+#nav-user:hover #nav-dropdown::after {
+  /*border-color: red;*/
+  transform: rotate(135deg);
+}
+
+.drop-icon {
+  margin-right: 10px;
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 import * as auth from '../AuthFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Navbar, NavbarBrand, NavbarStart, NavbarItem, NavbarLink, NavbarDropdown, NavbarEnd, Icon, Field, Input, Control } from 'bloomer';
+import { Navbar, NavbarBrand, NavbarStart, NavbarItem, NavbarLink, NavbarDropdown, NavbarEnd, Icon, Field, Input, Control, Button } from 'bloomer';
 import './style.css';
 
 class CustomNav extends Component {
@@ -27,10 +28,18 @@ class CustomNav extends Component {
           <NavbarItem>
             <FontAwesomeIcon id='dev' icon={['fab', 'dev']} />
           </NavbarItem>
+          <NavbarItem id='nav-user' hasDropdown isHoverable isHidden='desktop'>
+            <FontAwesomeIcon id='user-circle' icon={['fas', 'user-circle']} />
+            <NavbarLink href={'/users/'+userInfo.id} id='nav-dropdown'>{userInfo.username}</NavbarLink>
+            <NavbarDropdown>
+                <NavbarItem className='dropdown-options' href='#/'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
+                <NavbarItem className='dropdown-options' href='#/'><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
+            </NavbarDropdown>
+          </NavbarItem>
         </NavbarBrand>
         <NavbarStart>
           <NavbarItem isHidden='touch'>
-            <Field>
+            <Field isHorizontal>
               <Control>
                 <Input id='find-user' type='text' placeholder='Find User'/>
               </Control>
@@ -41,13 +50,12 @@ class CustomNav extends Component {
           </NavbarItem>
         </NavbarStart>
         <NavbarEnd>
-          <NavbarItem id='nav-user' hasDropdown isHoverable isAlign='centered'>
+          <NavbarItem id='nav-user' hasDropdown isHoverable isHidden='touch'>
             <FontAwesomeIcon id='user-circle' icon={['fas', 'user-circle']} />
-            <NavbarLink id='nav-dropdown' href=''>{userInfo.username}</NavbarLink>
+            <NavbarLink href={'/users/'+userInfo.id} id='nav-dropdown'>{userInfo.username}</NavbarLink>
             <NavbarDropdown>
-                <NavbarItem href='#/'>One A</NavbarItem>
-                <NavbarItem href='#/'>Two B</NavbarItem>
-                <NavbarItem href='#/'>Two A</NavbarItem>
+                <NavbarItem className='dropdown-options' href='#/'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
+                <NavbarItem className='dropdown-options' href='#/'><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
         </NavbarEnd>
