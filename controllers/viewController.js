@@ -20,6 +20,6 @@ module.exports = {
   },
 
   currentUser(req, res) {
-    res.send(res.locals);
+    res.json(res.locals);
   }
 }

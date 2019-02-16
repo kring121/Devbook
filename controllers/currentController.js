@@ -21,11 +21,16 @@ module.exports = {
         } else {
           // if testing on Postman use req.userId = authData.user
           // if testing with React user req.userId = authData.user.id
-          res.json({
+          // res.json({
+          //   id: authData.user.id,
+          //   username: authData.user.username,
+          //   name: authData.user.name,
+          // })
+          res.locals = {
             id: authData.user.id,
             username: authData.user.username,
             name: authData.user.name,
-          })
+          }
           next()
         }
       })
