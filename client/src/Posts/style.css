@@ -1,0 +1,11 @@
+.card {
+  width: 500px;
+  margin-top: 3%;
+}
+
+.post {
+  background: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
