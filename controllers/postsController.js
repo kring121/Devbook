@@ -5,7 +5,7 @@ module.exports = {
     try {
       res.locals = await Post.findAll({
         rejectOnEmpty: true,
-        include: [{model: User, attributes: ['id', 'username']}]
+        include: [{model: User, attributes: ['id', 'username', 'name']}]
       });
       next()
     } catch(e) {

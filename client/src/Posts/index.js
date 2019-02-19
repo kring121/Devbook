@@ -14,7 +14,6 @@ class Posts extends Component {
       liked: false,
       previewLink: {},
     }
-    this.fetchLinkPreview = this.fetchLinkPreview.bind(this);
   }
   componentDidMount(){
     auth.setHeader();
@@ -63,26 +62,19 @@ class Posts extends Component {
       })
       .then(
         this.setState({
-          liked: false,
+          liked: true,
         })
       )
     }
   }
 
-  fetchLinkPreview(postLink){
-    let imageLink = '';
-    axios.get(`http://api.linkpreview.net/?key=${process.env.REACT_APP_LINK_PREVIEW_KEY}&q=${postLink}`)
-    .then( res => this.setState({ previewLink: res.data}))
-    .catch( err => console.log(err));
-    // console.log(imageLink)
-  }
   render() {
     const { posts, comments, viewComments, previewLink } = this.state;
     return (
       <div className="posts">
         {posts.map((post) =>
           <div className='post' key={'post-' + post.id}>
-            <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : this.fetchLinkPreview('www.google.com')}/>
+            <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name}/>
             <button onClick={() => this.handleLike(post.id)}>Like</button>
             <p onClick={() => this.fetchComments(post.id)}>{ viewComments ? 'Hide Comments' : 'View Comments' }</p>
             { viewComments ?

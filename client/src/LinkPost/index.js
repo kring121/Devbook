@@ -30,9 +30,9 @@ class LinkPost extends Component {
       <div className="link-post">
         <form onSubmit={this.createPost} encType='multipart/form-data'>
           <label>Link</label>
-          <input ref='link' type='text'/>
+          <input ref='link' type='url' pattern="https?://.+"/>
           <label>Github</label>
-          <input ref='github' type='text'/>
+          <input ref='github' type='url' pattern="https?://.+"/>
           <label>Caption</label>
           <input type='text' ref='caption'/>
           <button type='submit'>Submit</button>
