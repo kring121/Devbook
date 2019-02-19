@@ -28,6 +28,19 @@ module.exports = {
     }
   },
 
+  async currentUserLike(req, res, next) {
+    try {
+      const user_id = res.locals.id;
+      res.locals = await Like.findAll({
+        rejectOnEmpty: true,
+        where: {user_id}
+      });
+      next()
+    } catch(e) {
+      next(e);
+    }
+  },
+
   async destroy(req, res, next) {
     try {
       const post_id = Number.parseInt(req.params.id, 10);

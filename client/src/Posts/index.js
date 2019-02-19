@@ -11,7 +11,7 @@ class Posts extends Component {
       posts: [],
       comments: [],
       viewComments: false,
-      liked: false,
+      liked: [],
       previewLink: {},
     }
   }
@@ -20,6 +20,10 @@ class Posts extends Component {
     axios.get('/posts')
       .then(res => res.data)
       .then(posts => this.setState({posts: posts}));
+    axios.get('/check/likes')
+      .then(res => res.data)
+      .then(likes => this.setState({liked: likes}))
+      .catch(err => console.log(err));
   }
 
   fetchComments(postId){
@@ -49,22 +53,17 @@ class Posts extends Component {
   }
 
   handleLike(postId){
-    if(this.state.liked === true){
-      axios.delete('/likes/'+postId)
-      .then(
-        this.setState({
-          liked: false,
+    const { liked } = this.state;
+    const myLikes = liked.map( like => like.post_id);
+
+    for( let i = 0; i < myLikes.length; i++){
+      if( myLikes[i] === postId){
+        axios.delete('/likes/'+postId)
+      } else {
+        axios.post('/likes', {
+          post_id: postId
         })
-      )
-    } else {
-      axios.post('/likes', {
-        post_id: postId
-      })
-      .then(
-        this.setState({
-          liked: true,
-        })
-      )
+      }
     }
   }
 
