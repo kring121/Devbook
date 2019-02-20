@@ -46,7 +46,6 @@ module.exports = {
       const user_id = req.userId;
       await Like.destroy({
         where: { post_id, user_id},
-        limit: 1,
       });
       next();
     } catch (e) {

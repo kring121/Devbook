@@ -48,6 +48,7 @@ class ImagePost extends Component {
     .uploadFile(file, config)
     .then(data => {
       const imageSource = data.location;
+      console.log(imageSource);
       axios.post('/posts', {
         image: imageSource,
         caption: caption,

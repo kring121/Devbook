@@ -49,7 +49,7 @@ class Posts extends Component {
     };
     for(let i = 0; i < liked.length; i++){
       if(liked[i].post_id === postId){
-        return likeStyle;
+        return likeStyle
       }
     }
   }
@@ -67,23 +67,20 @@ class Posts extends Component {
 
   handleLike(postId){
     const { liked } = this.state;
-
-    for( let i = 0; i < liked.length; i++){
-      let arrayCopy = liked.slice();
-      if( liked[i].post_id === postId){
-        axios.delete('/likes/'+postId)
-        .then( arrayCopy.splice(i, 1))
-        .then( this.setState({ liked: arrayCopy}))
-      }
-    }
-
-    // initial like
-    if(liked.length === 0){
+    let arrayCopy = liked.slice();
+    if(liked.every(function(element){return element.post_id !== postId})){
       axios.post('/likes', {
         post_id: postId
       })
       .then(res => res.data)
-      .then(liked => this.setState({liked: [liked]}));
+      .then(newLike => this.setState(prevState => ({
+        liked: [...prevState.liked, newLike]
+      })))
+    } else {
+      const index = liked.findIndex(function(element){return element.post_id === postId});
+      axios.delete('/likes/'+postId)
+        .then( arrayCopy.splice(index, 1))
+        .then( this.setState({ liked: arrayCopy}));
     }
   }
 
