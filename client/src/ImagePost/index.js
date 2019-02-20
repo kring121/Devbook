@@ -6,6 +6,24 @@ import * as auth from '../AuthFunctions';
 import { image64toCanvasRef, base64StringtoFile, extractImageFileExtensionFromBase64 } from '../ImageHandlingFunctions';
 import 'react-image-crop/dist/ReactCrop.css';
 
+function Uploading(){
+  return(
+    <div className='upload'>
+      <h1>File uploading</h1>
+      <p>Thank you for your patience</p>
+    </div>
+    )
+}
+
+function UploadSuccess(){
+  return(
+    <div className='upload'>
+      <h1>File uploaded!</h1>
+      <button>Exit</button>
+    </div>
+    )
+}
+
 class ImagePost extends Component {
   constructor(props){
     super(props);
@@ -17,6 +35,7 @@ class ImagePost extends Component {
         aspect: 1/1,
       },
       croppedImage: null,
+      waiting: false
     }
     this.createPost = this.createPost.bind(this);
     this.previewImage = this.previewImage.bind(this);
@@ -31,6 +50,7 @@ class ImagePost extends Component {
     auth.setHeader();
   }
   createPost(e) {
+    this.setState({ waiting: true });
     const config = {
       bucketName: 'fullstack-app',
       dirName: 'photos',
@@ -52,7 +72,9 @@ class ImagePost extends Component {
       axios.post('/posts', {
         image: imageSource,
         caption: caption,
-      }).catch(err => console.log(err.response.data))
+      })
+    .then(this.setState({waiting: 'success'}))
+      .catch(err => console.log(err.response.data))
     })
   }
 
@@ -104,8 +126,22 @@ class ImagePost extends Component {
     this.setState({imgPreviewSrc: null});
   }
 
+  uploading(condition){
+    // const { waiting } = this.state;
+    switch(condition){
+      case true:
+      return <Uploading/>
+      break;
+      case 'success':
+      return <UploadSuccess/>
+      break;
+      default:
+      return <h1>No upload so far</h1>
+    }
+  }
+
   render() {
-    const { imgPreviewSrc, crop } = this.state;
+    const { imgPreviewSrc, crop, waiting } = this.state;
     return (
       <div className="img-post">
         <form onSubmit={this.createPost} encType='multipart/form-data'>
@@ -127,6 +163,7 @@ class ImagePost extends Component {
             <button onClick={this.handleCropSave}>Save</button>
           </div>
           : ''}
+          {this.uploading(waiting)}
       </div>
     );
   }
