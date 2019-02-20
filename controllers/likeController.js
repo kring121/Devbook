@@ -32,7 +32,6 @@ module.exports = {
     try {
       const user_id = res.locals.id;
       res.locals = await Like.findAll({
-        rejectOnEmpty: true,
         where: {user_id}
       });
       next()

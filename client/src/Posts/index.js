@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import PostComponent from '../PostComponent';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './style.css';
 
 class Posts extends Component {
@@ -41,6 +42,18 @@ class Posts extends Component {
     }
   }
 
+  fillLikes(postId){
+    const { liked } = this.state;
+    const likeStyle = {
+      color: 'red'
+    };
+    for(let i = 0; i < liked.length; i++){
+      if(liked[i].post_id === postId){
+        return likeStyle;
+      }
+    }
+  }
+
   handleComment(e, postId){
     e.preventDefault()
 
@@ -54,27 +67,34 @@ class Posts extends Component {
 
   handleLike(postId){
     const { liked } = this.state;
-    const myLikes = liked.map( like => like.post_id);
 
-    for( let i = 0; i < myLikes.length; i++){
-      if( myLikes[i] === postId){
+    for( let i = 0; i < liked.length; i++){
+      let arrayCopy = liked.slice();
+      if( liked[i].post_id === postId){
         axios.delete('/likes/'+postId)
-      } else {
-        axios.post('/likes', {
-          post_id: postId
-        })
+        .then( arrayCopy.splice(i, 1))
+        .then( this.setState({ liked: arrayCopy}))
       }
+    }
+
+    // initial like
+    if(liked.length === 0){
+      axios.post('/likes', {
+        post_id: postId
+      })
+      .then(res => res.data)
+      .then(liked => this.setState({liked: [liked]}));
     }
   }
 
   render() {
-    const { posts, comments, viewComments, previewLink } = this.state;
+    const { posts, comments, viewComments, previewLink, liked } = this.state;
     return (
       <div className="posts">
         {posts.map((post) =>
           <div className='post' key={'post-' + post.id}>
             <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name}/>
-            <button onClick={() => this.handleLike(post.id)}>Like</button>
+            <FontAwesomeIcon icon={['fas', 'heart']} onClick={() => this.handleLike(post.id)} style={this.fillLikes(post.id)}/>
             <p onClick={() => this.fetchComments(post.id)}>{ viewComments ? 'Hide Comments' : 'View Comments' }</p>
             { viewComments ?
               comments.map((comment) =>
