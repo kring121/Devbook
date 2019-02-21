@@ -5,7 +5,7 @@ import * as auth from '../AuthFunctions';
 import ImagePost from '../ImagePost';
 import LinkPost from '../LinkPost';
 import './style.css';
-import { Button } from 'bloomer';
+import { Button, Title, Notification, Box, Tabs, TabList, Tab, TabLink } from 'bloomer';
 
 class CreatePost extends Component {
   constructor(props){
@@ -20,12 +20,11 @@ class CreatePost extends Component {
     auth.setHeader();
   }
 
-  toggleSelection() {
-    const { imgOrLink } = this.state;
-    if( imgOrLink === 'img'){
-      this.setState({imgOrLink: 'link'});
-    } else {
+  toggleSelection(clickSelection) {
+    if( clickSelection === 'img'){
       this.setState({imgOrLink: 'img'});
+    } else {
+      this.setState({imgOrLink: 'link'});
     }
   }
 
@@ -33,8 +32,20 @@ class CreatePost extends Component {
     const { imgOrLink } = this.state;
     return (
       <div className="create-post">
-        <Button isColor='success' onClick={this.toggleSelection}>{ imgOrLink === 'img' ? 'Link' : 'Image'}</Button>
-        { imgOrLink === 'img' ? <ImagePost/> : <LinkPost/>}
+        <Box hasTextAlign='centered'>
+          <Title isSize={1}>Upload an Image or Link</Title>
+          <Tabs>
+            <TabList id='img-link-tablist'>
+              <Tab onClick={() => this.toggleSelection('img')} isActive={imgOrLink === 'img' ? true : false}>
+                <TabLink>Image</TabLink>
+              </Tab>
+              <Tab onClick={() => this.toggleSelection('link')} isActive={imgOrLink === 'img' ? false : true}>
+                <TabLink>Link</TabLink>
+              </Tab>
+            </TabList>
+          </Tabs>
+          { imgOrLink === 'img' ? <ImagePost/> : <LinkPost/>}
+        </Box>
       </div>
     );
   }
