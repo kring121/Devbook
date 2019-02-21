@@ -46,3 +46,11 @@
 .dashboard-icons svg:hover {
   color: hsl(217, 71%, 53%);
 }
+
+.searchbar {
+  margin-bottom: 0 !important;
+}
+
+.search-input {
+  width: 100% !important;
+}

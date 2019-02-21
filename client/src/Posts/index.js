@@ -4,14 +4,16 @@ import * as auth from '../AuthFunctions';
 import PostComponent from '../PostComponent';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title } from 'bloomer';
+import { Columns, Column, Title, Field, Control, Input, Button } from 'bloomer';
 
 class Posts extends Component {
   constructor(props){
     super(props);
     this.state = {
       posts: [],
+      searchbar: false,
     }
+  this.searchBar = this.searchBar.bind(this);
   }
   componentDidMount(){
     auth.setHeader();
@@ -81,28 +83,49 @@ class Posts extends Component {
     }
   }
 
+  searchBar(){
+    const { searchbar } = this.state;
+
+    if( searchbar === false) {
+      this.setState({searchbar: true})
+    } else {
+      this.setState({searchbar: false})
+    }
+
+  }
+
   render() {
-    const { posts } = this.state;
+    const { posts, searchbar } = this.state;
     return (
-      <Columns>
-      <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}}>
-      <div className="posts">
-        {posts.map((post) =>
-          <div className='post' key={'post-' + post.id}>
-            <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
-          </div>
-        )}
-      </div>
-      </Column>
-      <Column className='dashboard' isHidden='mobile' hasTextAlign='centered'>
-        <div className='dashboard-icons'>
-          <FontAwesomeIcon icon={['fas', 'home']}/>
-          <FontAwesomeIcon icon={['fas', 'search']}/>
-          <FontAwesomeIcon icon={['fas', 'plus-square']}/>
-          <FontAwesomeIcon icon={['fas', 'user']}/>
+      <div>
+        <Columns>
+        <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}}>
+          { searchbar ? <Field isHorizontal className='searchbar'>
+            <Control className='search-input'>
+              <Input type='text' placeholder='Find user'/>
+            </Control>
+            <Control>
+              <Button isColor='primary'>Search</Button>
+            </Control>
+          </Field> : null}
+        <div className="posts">
+          {posts.map((post) =>
+            <div className='post' key={'post-' + post.id}>
+              <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
+            </div>
+          )}
         </div>
-      </Column>
-      </Columns>
+        </Column>
+        <Column className='dashboard' isHidden='mobile' hasTextAlign='centered'>
+          <div className='dashboard-icons'>
+            <FontAwesomeIcon icon={['fas', 'home']}/>
+            <FontAwesomeIcon onClick={this.searchBar} icon={['fas', 'search']}/>
+            <FontAwesomeIcon icon={['fas', 'plus-square']}/>
+            <FontAwesomeIcon icon={['fas', 'user']}/>
+          </div>
+        </Column>
+        </Columns>
+      </div>
     );
   }
 }
