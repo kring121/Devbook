@@ -149,7 +149,7 @@ uploadSuccess(){
       return this.uploadSuccess()
       break;
       default:
-      return <h1>No upload so far</h1>
+      return null;
     }
   }
 
@@ -157,12 +157,6 @@ uploadSuccess(){
     const { imgPreviewSrc, crop, waiting, previewActive, croppedImage } = this.state;
     return (
       <div className="img-post">
-        <form onSubmit={this.createPost} encType='multipart/form-data'>
-          <label>Upload Image</label>
-          <input ref={this.fileRef} type='file' onChange={this.previewImage} accept="image/*"/>
-          <input type='text' ref='caption'/>
-          <button type='submit'>Submit</button>
-        </form>
         {imgPreviewSrc !== null ?
           <div className='crop-container'>
             { previewActive === true ?

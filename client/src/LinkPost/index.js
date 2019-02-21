@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
+import { Field, Control, Input, Label, Button } from 'bloomer';
 
 class LinkPost extends Component {
   constructor(props){
@@ -14,10 +15,9 @@ class LinkPost extends Component {
   createPost(e) {
     e.preventDefault();
     e.persist();
-    // const file = e.target[0].files[0];
-    const caption = this.refs.caption.value;
-    const link = this.refs.link.value;
-    const github = this.refs.github.value;
+    const caption = e.target.caption.value;
+    const link = e.target.link.value;
+    const github = e.target.github.value;
 
     axios.post('/posts', {
         caption: caption,
@@ -28,14 +28,25 @@ class LinkPost extends Component {
   render() {
     return (
       <div className="link-post">
-        <form onSubmit={this.createPost} encType='multipart/form-data'>
-          <label>Link</label>
-          <input ref='link' type='url' pattern="https?://.+"/>
-          <label>Github</label>
-          <input ref='github' type='url' pattern="https?://.+"/>
-          <label>Caption</label>
-          <input type='text' ref='caption'/>
-          <button type='submit'>Submit</button>
+        <form onSubmit={this.createPost}>
+          <Field>
+            <Label>Link</Label>
+            <Control>
+              <Input name='link' type='url' pattern="https?://.+"/>
+            </Control>
+            <Label>Github</Label>
+            <Control>
+              <Input name='github' type='url' pattern="https?://.+"/>
+            </Control>
+            <Label>Caption</Label>
+            <Control>
+              <Input name='caption' type='text'/>
+            </Control>
+            <br/>
+            <Control id='submit-link'>
+              <Button type='submit' isColor='primary'>Submit</Button>
+            </Control>
+          </Field>
         </form>
       </div>
     );

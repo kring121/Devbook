@@ -37,3 +37,7 @@ img {
 .box {
   max-width: 600px;
 }
+
+#submit-link {
+  text-align: center;
+}
