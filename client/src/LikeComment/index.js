@@ -1,16 +1,18 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
-import PostComponent from '../PostComponent';
-import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title } from 'bloomer';
+import { Field, Control, Input, Button, Title, Subtitle } from 'bloomer';
 
-class Posts extends Component {
+class LikeComment extends Component {
   constructor(props){
     super(props);
     this.state = {
       posts: [],
+      comments: [],
+      viewComments: false,
+      liked: [],
     }
   }
   componentDidMount(){
@@ -42,7 +44,7 @@ class Posts extends Component {
   fillLikes(postId){
     const { liked } = this.state;
     const likeStyle = {
-      color: 'red'
+      color: 'crimson'
     };
     for(let i = 0; i < liked.length; i++){
       if(liked[i].post_id === postId){
@@ -82,29 +84,30 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts } = this.state;
+    const { comments, viewComments } = this.state;
+    const { postId } = this.props;
     return (
-      <Columns>
-      <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}}>
-      <div className="posts">
-        {posts.map((post) =>
-          <div className='post' key={'post-' + post.id}>
-            <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
-          </div>
-        )}
+      <div className="like-comment">
+        <FontAwesomeIcon icon={['fas', 'heart']} onClick={() => this.handleLike(postId)} style={this.fillLikes(postId)}/>
+        <p onClick={() => this.fetchComments(postId)}>{ viewComments ? 'Hide Comments' : 'View Comments' }</p>
+        { viewComments ?
+          comments.map((comment) =>
+          <div className='comment' key={'comment'+comment.id}>
+            <Title isSize={6}><Link className='username-link' to={'/users/' + comment.user_id}>{comment.user.username}</Link></Title>
+            <Subtitle className='comment-content' isSize={6}>{comment.content}</Subtitle>
+          </div>)
+          : null }
+        <form onSubmit={(e) => this.handleComment(e, postId)}>
+          <Field>
+            <Control className='comment-control'>
+              <Input name='comment'/>
+              <Button type='submit' isColor='link'>Post</Button>
+            </Control>
+          </Field>
+        </form>
       </div>
-      </Column>
-      <Column className='dashboard' isHidden='mobile' hasTextAlign='centered'>
-        <div className='dashboard-icons'>
-          <FontAwesomeIcon icon={['fas', 'home']}/>
-          <FontAwesomeIcon icon={['fas', 'search']}/>
-          <FontAwesomeIcon icon={['fas', 'plus-square']}/>
-          <FontAwesomeIcon icon={['fas', 'user']}/>
-        </div>
-      </Column>
-      </Columns>
     );
   }
 }
 
-export default Posts;
+export default LikeComment;

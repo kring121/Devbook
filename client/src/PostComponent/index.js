@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+import LikeComment from '../LikeComment';
 import {Card, CardHeader, CardHeaderTitle, CardHeaderIcon, CardImage, Image, CardContent, Media, MediaLeft, MediaContent, Title, Subtitle, Content, Container, Notification, Box } from 'bloomer';
 import MicrolinkCard from '@microlink/react'
 
@@ -7,12 +9,12 @@ class PostComponent extends Component {
     super(props);
   }
   render() {
-    const { username, image, caption, previewLink, nameOfUser } = this.props;
+    const { username, image, caption, previewLink, nameOfUser, postId, userId } = this.props;
     return(
       <Card>
         <CardHeader>
             <CardHeaderTitle>
-                {username}
+                <Link className='username-link' to={'/users/'+userId}>{username}</Link>
             </CardHeaderTitle>
         </CardHeader>
         { image === 'no-image' ?
@@ -34,13 +36,14 @@ class PostComponent extends Component {
                 </MediaLeft>
                 <MediaContent>
                     <Title isSize={4}>{nameOfUser}</Title>
-                    <Subtitle isSize={6}>{'@'+username}</Subtitle>
+                    <Subtitle isSize={6}><Link className='username-link' to={'/users/'+userId}>{'@'+username}</Link></Subtitle>
                 </MediaContent>
             </Media>
             <Content>
                 {caption}
                 <br/>
                 <small>11:09 PM - 30 October 2014</small>
+                <LikeComment postId={postId}/>
             </Content>
         </CardContent>
     </Card>

@@ -4,8 +4,45 @@
 }
 
 .post {
-  background: #454c56;
+  background: #eceff1;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.posts {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.comment-control {
+  display: flex;
+}
+
+.comment-content {
+  color: hsl(0, 0%, 48%) !important;
+  font-weight: 400 !important;
+}
+
+.username-link {
+  color: #363636 !important;
+}
+
+.dashboard {
+  color: #363636;
+  font-size: 30px;
+}
+
+.dashboard-icons {
+  /*background: red;*/
+  height: 75vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20%;
+}
+
+.dashboard-icons svg:hover {
+  color: hsl(217, 71%, 53%);
 }

@@ -14,8 +14,8 @@ import './style.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {fab} from "@fortawesome/free-brands-svg-icons";
-import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload} from '@fortawesome/free-solid-svg-icons';
-library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload);
+import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser} from '@fortawesome/free-solid-svg-icons';
+library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser);
 
 class App extends Component {
   render() {
