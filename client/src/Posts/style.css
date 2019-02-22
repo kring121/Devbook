@@ -54,3 +54,9 @@
 .search-input {
   width: 100% !important;
 }
+
+#search-box {
+  position: absolute;
+  z-index: 1;
+  width: 100%;
+}

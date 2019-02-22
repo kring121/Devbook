@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import PostComponent from '../PostComponent';
 import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title, Field, Control, Input, Button } from 'bloomer';
+import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
 
 class Posts extends Component {
   constructor(props){
@@ -12,8 +13,13 @@ class Posts extends Component {
     this.state = {
       posts: [],
       searchbar: false,
+      searchUser: '',
+      possibleSearch: []
     }
   this.searchBar = this.searchBar.bind(this);
+  this.searchUser = this.searchUser.bind(this);
+  this.dataSearch = this.dataSearch.bind(this);
+  this.suggestedUsers = this.suggestedUsers.bind(this);
   }
   componentDidMount(){
     auth.setHeader();
@@ -94,20 +100,48 @@ class Posts extends Component {
 
   }
 
+  searchUser(e){
+    this.setState({searchUser: e.target.value}, this.dataSearch)
+  }
+
+  dataSearch() {
+    const { searchUser } = this.state;
+    axios.get(`/search/${searchUser}`)
+      .then(res => res.data)
+      .then(result => this.setState({possibleSearch: result}))
+      .catch(err => this.setState({possibleSearch: []}));
+  }
+
+  suggestedUsers() {
+    const { possibleSearch } = this.state;
+    return(
+      <Box id='search-box'>
+        <Menu>
+          <MenuList>
+            {possibleSearch.map(user =>
+              <li><MenuLink href={'/users/'+user.id}>{user.username}</MenuLink></li>
+            )}
+          </MenuList>
+        </Menu>
+      </Box>
+    )
+  }
+
   render() {
-    const { posts, searchbar } = this.state;
+    const { posts, searchbar, possibleSearch } = this.state;
     return (
       <div>
         <Columns>
         <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}}>
           { searchbar ? <Field isHorizontal className='searchbar'>
             <Control className='search-input'>
-              <Input type='text' placeholder='Find user'/>
+              <Input onChange={this.searchUser} type='text' name='search' placeholder='Find user'/>
             </Control>
             <Control>
               <Button isColor='primary'>Search</Button>
             </Control>
           </Field> : null}
+          {possibleSearch.length !== 0 ? this.suggestedUsers() : null}
         <div className="posts">
           {posts.map((post) =>
             <div className='post' key={'post-' + post.id}>
