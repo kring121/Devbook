@@ -15,14 +15,7 @@ class Posts extends Component {
     super(props);
     this.state = {
       posts: [],
-      searchbar: false,
-      searchUser: '',
-      possibleSearch: []
     }
-  this.searchBar = this.searchBar.bind(this);
-  this.searchUser = this.searchUser.bind(this);
-  this.dataSearch = this.dataSearch.bind(this);
-  this.suggestedUsers = this.suggestedUsers.bind(this);
   }
   componentDidMount(){
     auth.setHeader();
@@ -92,63 +85,17 @@ class Posts extends Component {
     }
   }
 
-  searchBar(){
-    const { searchbar } = this.state;
-
-    if( searchbar === false) {
-      this.setState({searchbar: true})
-    } else {
-      this.setState({searchbar: false})
-    }
-
-  }
-
-  searchUser(e){
-    this.setState({searchUser: e.target.value}, this.dataSearch)
-  }
-
-  dataSearch() {
-    const { searchUser } = this.state;
-    axios.get(`/search/${searchUser}`)
-      .then(res => res.data)
-      .then(result => this.setState({possibleSearch: result}))
-      .catch(err => this.setState({possibleSearch: []}));
-  }
-
-  suggestedUsers() {
-    const { possibleSearch } = this.state;
-    return(
-      <Box id='search-box'>
-        <Menu>
-          <MenuList>
-            {possibleSearch.map(user =>
-              <li><MenuLink href={'/users/'+user.id}>{user.username}</MenuLink></li>
-            )}
-          </MenuList>
-        </Menu>
-      </Box>
-    )
-  }
-
   render() {
-    const { posts, searchbar, possibleSearch } = this.state;
+    const { posts } = this.state;
     return (
       <div>
-        <Columns>
-        <MobileDashboard searchBar={this.searchBar}/>
-          <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}}>
-
-            <Searchbar searchbar={searchbar} possibleSearch={possibleSearch} searchUser={this.searchUser} suggestedUsers={this.suggestedUsers}/>
-          <div className="posts">
+        <div className="posts">
             {posts.map((post) =>
               <div className='post' key={'post-' + post.id}>
                 <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
               </div>
             )}
-          </div>
-          </Column>
-          <Dashboard searchBar={this.searchBar}/>
-        </Columns>
+        </div>
       </div>
     );
   }

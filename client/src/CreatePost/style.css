@@ -17,6 +17,8 @@ img {
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: 100vh;
+  overflow-x: hidden;
 }
 
 .react-crop {
@@ -40,4 +42,8 @@ img {
 
 #submit-link {
   text-align: center;
+}
+
+.large-column {
+  background: #eceff1 !important;
 }

@@ -33,6 +33,10 @@
   font-size: 30px;
 }
 
+.dashboard a {
+  color: #363636 !important;
+}
+
 .dashboard-icons {
   /*background: red;*/
   height: 75vh;
@@ -75,6 +79,11 @@
   font-size: 30px;
   display: flex;
   justify-content: space-between;
-  /*color: white;*/
+  color: #363636 !important;
+}
+
+.mobile-dashboard-icons a {
+  line-height: 0 !important;
+  color: #363636 !important;
 }
 
