@@ -25,8 +25,8 @@ class App extends Component {
           <CustomNav/>
           <Switch>
             <Route exact path='/' component={UserLogin}/>
-            <Route exact path='/users' component={Users}/>
             <Route exact path='/create/user' component={CreateUser}/>
+            <Route exact path='/users' component={Users}/>
             <Route exact path='/users/:userId' component={UserProfile}/>
             <Route exact path='/posts' component={Posts}/>
             <Route exact path='/create/post' component={CreatePost}/>

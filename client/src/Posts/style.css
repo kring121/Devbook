@@ -49,6 +49,7 @@
 
 .searchbar {
   margin-bottom: 0 !important;
+  display: flex !important;
 }
 
 .search-input {
@@ -59,4 +60,21 @@
   position: absolute;
   z-index: 1;
   width: 100%;
+  padding: 0.25rem;
 }
+
+.mobile-dashboard {
+  position: fixed !important;
+  width: 103%;
+  top: 94vh !important;
+  background: hsl(0, 0%, 96%) !important;
+  border-top: 2px solid hsl(0, 0%, 86%);
+}
+
+.mobile-dashboard-icons {
+  font-size: 30px;
+  display: flex;
+  justify-content: space-between;
+  /*color: white;*/
+}
+
