@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
+import { Modal, ModalBackground, ModalContent, ModalClose, Title, Button, Box } from 'bloomer';
 class LogOut extends Component {
   constructor(props){
     super(props);
@@ -9,20 +11,30 @@ class LogOut extends Component {
   }
 
   logOutUser(){
-    sessionStorage.removeItem('jwttoken');
+    sessionStorage.removeItem('jwttoken')
+    this.setState({fireRedirect: true});
   }
 
   render() {
     const { fireRedirect } = this.state;
+    const { launchModal } = this.props;
     if (fireRedirect === true) {
       return <Redirect to='/'/>
     }
     return (
-      <div className="logout">
-        <h1>Are you sure you want to logout?</h1>
-        <button onClick={this.logOutUser}>Yes</button>
-        <button>No</button>
-      </div>
+      <Modal isActive>
+        <ModalBackground/>
+        <ModalContent>
+          <Box hasTextAlign='centered'>
+            <Title>Are you sure you want to logout?</Title>
+            <div id='logout-btns'>
+              <Button isColor='success' onClick={this.logOutUser}>Yes</Button>
+              <Button isColor='danger' onClick={launchModal}>No</Button>
+            </div>
+          </Box>
+        </ModalContent>
+        <ModalClose onClick={launchModal}/>
+      </Modal>
     );
   }
 }

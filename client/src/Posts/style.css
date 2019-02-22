@@ -87,3 +87,7 @@
   color: #363636 !important;
 }
 
+#logout-btns button {
+  margin: 5px 10px 5px 10px;
+}
+

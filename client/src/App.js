@@ -10,6 +10,7 @@ import CreatePost from './CreatePost';
 import CustomNav from './CustomNav';
 import Searchbar from './Searchbar';
 import Dashboard from './Dashboard';
+import LogOut from './LogOut';
 import MobileDashboard from './MobileDashboard';
 import * as auth from './AuthFunctions';
 import 'bulma/css/bulma.css';
@@ -29,11 +30,13 @@ class App extends Component {
       searchUser: '',
       possibleSearch: [],
       userInfo: {},
+      logout: false,
     }
   this.searchBar = this.searchBar.bind(this);
   this.searchUser = this.searchUser.bind(this);
   this.dataSearch = this.dataSearch.bind(this);
   this.suggestedUsers = this.suggestedUsers.bind(this);
+  this.launchModal = this.launchModal.bind(this);
   }
 
   componentDidMount(){
@@ -81,17 +84,27 @@ class App extends Component {
     )
   }
 
+  launchModal() {
+    const { logout } = this.state;
+    if ( logout === false) {
+      this.setState({logout: true})
+    } else {
+      this.setState({logout: false})
+    }
+  }
+
   render() {
-    const { searchbar, possibleSearch, userInfo } = this.state;
+    const { searchbar, possibleSearch, userInfo, logout } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
-          <CustomNav userInfo={userInfo}/>
+          <CustomNav userInfo={userInfo} launchModal={this.launchModal}/>
           <Switch>
             <Route exact path='/' component={UserLogin}/>
             <Route exact path='/create/user' component={CreateUser}/>
             <Route exact path='/users' component={Users}/>
             <Columns>
+              {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
               <MobileDashboard searchBar={this.searchBar} userId={userInfo.id}/>
               <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}} className='large-column'>
                 <Searchbar searchbar={searchbar} possibleSearch={possibleSearch} searchUser={this.searchUser} suggestedUsers={this.suggestedUsers}/>

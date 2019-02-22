@@ -73,3 +73,9 @@
 .drop-icon {
   margin-right: 10px;
 }
+
+.dropdown-options:hover {
+  color: hsl(217, 71%, 53%);
+  cursor: pointer;
+  background: hsl(0, 0%, 96%) !important;
+}
