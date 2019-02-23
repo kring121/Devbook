@@ -99,7 +99,10 @@ class ImagePost extends Component {
 
     const imgData64 = canvasRef.toDataURL('image/' + fileExtenstion)
 
-    const fileName = 'new-file.'+fileExtenstion;
+    const timeStamp = Math.floor(Date.now());
+    const timeString = timeStamp.toString();
+
+    const fileName = `${timeString + '.'}` + fileExtenstion;
 
 
     const croppedImage = base64StringtoFile(imgData64, fileName);
@@ -176,11 +179,11 @@ uploadSuccess(){
           </div>
           : ''}
         <form onSubmit={this.createPost}>
-        <Field isGrouped='centered'>
+        <Field >
           <Control isHidden={previewActive === false && croppedImage !== null ? false : true}>
             <Input type='text' placeholder='Add a caption' name='caption'/>
           </Control>
-          <Control>
+          <Control className='file-btns'>
             <div className="file is-primary">
               <label className="file-label">
                 <input className="file-input" type="file" onChange={this.previewImage} accept='image/*' ref={this.fileRef}/>
@@ -195,7 +198,7 @@ uploadSuccess(){
               </label>
             </div>
           </Control>
-          <Control isHidden={previewActive === false && croppedImage !== null ? false : true}>
+          <Control className='file-btns' isHidden={previewActive === false && croppedImage !== null ? false : true}>
             <Button type='submit' isColor='primary'>Submit</Button>
           </Control>
         </Field>

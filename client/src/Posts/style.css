@@ -91,3 +91,9 @@
   margin: 5px 10px 5px 10px;
 }
 
+.file-btns {
+  display: flex !important;
+  justify-content: center !important;
+  margin: 15px 10px 5px 10px !important;
+}
+

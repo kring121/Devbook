@@ -48,7 +48,7 @@ const Post = db.define('post', {
     unique: true,
   },
   image: {
-    type: Sequelize.STRING(128),
+    type: Sequelize.STRING(255),
     allowNull: true,
   },
   caption: {
