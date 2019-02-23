@@ -98,11 +98,11 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="App">
-          <CustomNav userInfo={userInfo} launchModal={this.launchModal}/>
           <Switch>
             <Route exact path='/' component={UserLogin}/>
             <Route exact path='/create/user' component={CreateUser}/>
             <Route exact path='/users' component={Users}/>
+            <CustomNav userInfo={userInfo} launchModal={this.launchModal}/>
             <Columns>
               {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
               <MobileDashboard searchBar={this.searchBar} userId={userInfo.id}/>

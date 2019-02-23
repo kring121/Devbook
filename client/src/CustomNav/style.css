@@ -1,5 +1,5 @@
-#navbar {
-  background: hsl(217, 71%, 53%);
+.navbar {
+  background: hsl(217, 71%, 53%) !important;
 }
 
 .navbar-brand {
@@ -78,4 +78,9 @@
   color: hsl(217, 71%, 53%);
   cursor: pointer;
   background: hsl(0, 0%, 96%) !important;
+}
+
+#login-nav {
+  display: flex;
+  justify-content: space-between;
 }

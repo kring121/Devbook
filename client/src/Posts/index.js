@@ -90,7 +90,7 @@ class Posts extends Component {
     return (
       <div>
         <div className="posts">
-            {posts.map((post) =>
+            {posts.reverse().map((post) =>
               <div className='post' key={'post-' + post.id}>
                 <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
               </div>
