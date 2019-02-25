@@ -19,8 +19,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
 import {fab} from "@fortawesome/free-brands-svg-icons";
-import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser} from '@fortawesome/free-solid-svg-icons';
-library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser);
+import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt } from '@fortawesome/free-solid-svg-icons';
+library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt);
 
 class App extends Component {
   constructor(props){
@@ -31,12 +31,14 @@ class App extends Component {
       possibleSearch: [],
       userInfo: {},
       logout: false,
+      login: false
     }
   this.searchBar = this.searchBar.bind(this);
   this.searchUser = this.searchUser.bind(this);
   this.dataSearch = this.dataSearch.bind(this);
   this.suggestedUsers = this.suggestedUsers.bind(this);
   this.launchModal = this.launchModal.bind(this);
+  this.loginActive = this.loginActive.bind(this);
   }
 
   componentDidMount(){
@@ -93,16 +95,20 @@ class App extends Component {
     }
   }
 
+  loginActive(trueOrFalse) {
+    this.setState({login: trueOrFalse});
+  }
+
   render() {
-    const { searchbar, possibleSearch, userInfo, logout } = this.state;
+    const { searchbar, possibleSearch, userInfo, logout, login } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
+          { login ? null : <CustomNav userInfo={userInfo} launchModal={this.launchModal}/> }
           <Switch>
-            <Route exact path='/' component={UserLogin}/>
+            <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
             <Route exact path='/create/user' component={CreateUser}/>
             <Route exact path='/users' component={Users}/>
-            <CustomNav userInfo={userInfo} launchModal={this.launchModal}/>
             <Columns>
               {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
               <MobileDashboard searchBar={this.searchBar} userId={userInfo.id}/>

@@ -12,3 +12,29 @@
 #signup-btn {
   margin-top: 10%;
 }
+
+
+.login-icon {
+  font-size: 35px;
+  margin-right: 20px;
+}
+
+#login-large-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+#login-large-column .title {
+  margin-top: 5%;
+}
+
+#mobile-login {
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+#login-btn {
+  margin-top: 5%;
+}

@@ -146,10 +146,10 @@ uploadSuccess(){
     // const { waiting } = this.state;
     switch(condition){
       case true:
-      return this.uploadingModal()
+      this.uploadingModal()
       break;
       case 'success':
-      return this.uploadSuccess()
+      this.uploadSuccess()
       break;
       default:
       return null;
