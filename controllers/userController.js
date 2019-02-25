@@ -1,4 +1,4 @@
-const { User } = require('../models');
+const { User, Post } = require('../models');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -20,6 +20,7 @@ module.exports = {
         where: { id },
         rejectOnEmpty: true,
         attributes: ['id', 'username', 'name'],
+        include: [{model: Post, where: {user_id: id}}]
       });
       next();
     } catch(e) {

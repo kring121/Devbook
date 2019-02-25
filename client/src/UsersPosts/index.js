@@ -6,16 +6,12 @@ import PostComponent from '../PostComponent';
 import Searchbar from '../Searchbar';
 import Dashboard from '../Dashboard';
 import MobileDashboard from '../MobileDashboard';
-import './style.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
 
-class Posts extends Component {
+class UsersPosts extends Component {
   constructor(props){
     super(props);
-    this.state = {
-      posts: []
-    }
   }
   componentDidMount(){
     auth.setHeader();
@@ -86,13 +82,13 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts } = this.state;
+    const { posts, userId, username, nameOfUser } = this.props;
     return (
       <div>
         <div className="posts">
             {posts.reverse().map((post) =>
               <div className='post' key={'post-' + post.id}>
-                <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
+                <PostComponent username={username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={nameOfUser} postId={post.id} userId={userId}/>
               </div>
             )}
         </div>
@@ -101,4 +97,4 @@ class Posts extends Component {
   }
 }
 
-export default Posts;
+export default UsersPosts;
