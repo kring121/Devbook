@@ -16,5 +16,23 @@ module.exports = {
     } catch(e) {
       next(e)
     }
-  }
+  },
+  async update(req, res, next) {
+    try {
+      const id = req.userId;
+      const { pic, bio, github, codepen, linkedin, website } = req.body;
+      const [, updatedProfile] = await Profile.update({
+        pic, bio, github, codepen, linkedin, website
+      }, {
+        where: { id },
+        limit: 1,
+        rejectOnEmpty: true,
+        returning: true,
+      });
+      res.locals = updatedProfile;
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
 }

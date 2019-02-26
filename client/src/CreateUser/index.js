@@ -51,19 +51,19 @@ class CreateUsers extends Component {
           <Field>
             <Label>Username</Label>
             <Control>
-              <Input type='text' name='username' placeholder='johnsmith123'/>
+              <Input type='text' name='username' placeholder='johnsmith123' required/>
             </Control>
             <Label>Name</Label>
             <Control>
-              <Input type='text' name='name' placeholder='John Smith'/>
+              <Input type='text' name='name' placeholder='John Smith' required/>
             </Control>
             <Label>Email</Label>
             <Control>
-              <Input type='email' name='email' placeholder='johnsmith@email.com'/>
+              <Input type='email' name='email' placeholder='johnsmith@email.com' required/>
             </Control>
             <Label>Password</Label>
             <Control>
-              <Input type='password' name='password' placeholder='password'/>
+              <Input type='password' name='password' placeholder='password' required/>
             </Control>
             <Control id='signup-btn'>
               <Button type='submit' isColor='success'>Sign Up</Button>

@@ -13,6 +13,7 @@ import Dashboard from './Dashboard';
 import LogOut from './LogOut';
 import MobileDashboard from './MobileDashboard';
 import CreateProfile from './CreateProfile';
+import EditProfile from './EditProfile';
 import * as auth from './AuthFunctions';
 import 'bulma/css/bulma.css';
 import './style.css';
@@ -32,7 +33,8 @@ class App extends Component {
       possibleSearch: [],
       userInfo: {},
       logout: false,
-      login: false
+      login: false,
+      redirectToLogin: false
     }
   this.searchBar = this.searchBar.bind(this);
   this.searchUser = this.searchUser.bind(this);
@@ -40,6 +42,7 @@ class App extends Component {
   this.suggestedUsers = this.suggestedUsers.bind(this);
   this.launchModal = this.launchModal.bind(this);
   this.loginActive = this.loginActive.bind(this);
+  this.fireRedirect = this.fireRedirect.bind(this);
   }
 
   componentDidMount(){
@@ -47,6 +50,15 @@ class App extends Component {
     axios.get('/check')
     .then(res => res.data)
     .then(userInfo => this.setState({userInfo: userInfo}))
+    .catch(err => this.fireRedirect(err.response.status))
+  }
+
+  fireRedirect(status){
+    if(status === 403) {
+      this.setState({
+        redirectToLogin: true
+      })
+    }
   }
 
   searchBar(){
@@ -101,10 +113,11 @@ class App extends Component {
   }
 
   render() {
-    const { searchbar, possibleSearch, userInfo, logout, login } = this.state;
+    const { searchbar, possibleSearch, userInfo, logout, login, redirectToLogin } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
+          { redirectToLogin ? auth.redirectToLogin() : null }
           { login ? null : <CustomNav userInfo={userInfo} launchModal={this.launchModal}/> }
           <Switch>
             <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
@@ -119,6 +132,7 @@ class App extends Component {
                 <Route exact path='/users/:userId' component={UserProfile}/>
                 <Route exact path='/posts' component={Posts}/>
                 <Route exact path='/create/post' component={CreatePost}/>
+                <Route exact path='/edit/profile' component={EditProfile}/>
               </Column>
               <Dashboard searchBar={this.searchBar} userId={userInfo.id}/>
             </Columns>

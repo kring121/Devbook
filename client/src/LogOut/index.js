@@ -10,6 +10,10 @@ class LogOut extends Component {
     this.logOutUser = this.logOutUser.bind(this);
   }
 
+  componentWillUnmount(){
+    this.props.launchModal();
+  }
+
   logOutUser(){
     sessionStorage.removeItem('jwttoken')
     this.setState({fireRedirect: true});

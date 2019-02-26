@@ -4,21 +4,22 @@ import ImagePost from '../ImagePost';
 import { Field, Input, Button, Control, Label, Title, Box } from 'bloomer';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
+import './style.css';
 
-class createProfile extends Component {
+class EditProfile extends Component {
   constructor(props){
     super(props);
     this.state = {
       fireRedirect: false,
     }
-    this.createProfile = this.createProfile.bind(this);
+    this.editProfile = this.editProfile.bind(this);
   }
 
   componentDidMount(){
     auth.setHeader()
   }
 
-  createProfile(e) {
+  editProfile(e) {
     e.preventDefault();
     const bio = (e.target.bio.value === '' ? null : e.target.bio.value);
     const github = (e.target.github.value === '' ? null : e.target.github.value);
@@ -26,7 +27,7 @@ class createProfile extends Component {
     const linkedin = (e.target.linkedin.value === '' ? null : e.target.linkedin.value);
     const website = (e.target.website.value === '' ? null : e.target.website.value);
 
-    axios.post('/profile', {
+    axios.put('/profile', {
         bio: bio,
         github: github,
         codepen: codepen,
@@ -41,36 +42,40 @@ class createProfile extends Component {
       });
   }
 
+  deleteAccount(){
+
+  }
+
   render() {
     const { fireRedirect } = this.state;
     if (fireRedirect === true) {
       return <Redirect to='/posts'/>
     }
     return (
-      <div className="create-profile">
-        <Box id='profile-box'>
-          <form onSubmit={this.createProfile}>
+      <div className="edit-profile">
+        <Box id='edit-profile-box'>
+          <form onSubmit={this.editProfile}>
             <Title>Edit Profile</Title>
             <Field>
               <Label>Bio</Label>
               <Control>
-                <Input type='text' name='bio'/>
+                <Input type='text' name='bio' defaultValue={null}/>
               </Control>
               <Label>Github</Label>
               <Control>
-                <Input name='github' type='url' pattern="https?://.+"/>
+                <Input name='github' type='url' pattern="https?://.+" defaultValue={null}/>
               </Control>
               <Label>Codepen</Label>
               <Control>
-                <Input name='codepen' type='url' pattern="https?://.+"/>
+                <Input name='codepen' type='url' pattern="https?://.+" defaultValue={null}/>
               </Control>
               <Label>LinkedIn</Label>
               <Control>
-                <Input name='linkedin' type='url' pattern="https?://.+"/>
+                <Input name='linkedin' type='url' pattern="https?://.+" defaultValue={null}/>
               </Control>
               <Label>Personal Website</Label>
               <Control>
-                <Input name='website' type='url' pattern="https?://.+"/>
+                <Input name='website' type='url' pattern="https?://.+" defaultValue={null}/>
               </Control>
               <Control id='signup-btn'>
                 <Button type='submit' isColor='success'>Submit</Button>
@@ -83,4 +88,4 @@ class createProfile extends Component {
   }
 }
 
-export default createProfile;
+export default EditProfile;

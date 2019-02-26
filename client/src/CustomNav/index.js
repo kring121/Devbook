@@ -19,7 +19,7 @@ class CustomNav extends Component {
             <FontAwesomeIcon id='user-circle' icon={['fas', 'user-circle']} />
             <NavbarLink href={'/users/'+userInfo.id} id='nav-dropdown'>{userInfo.username}</NavbarLink>
             <NavbarDropdown>
-                <NavbarItem className='dropdown-options' href='#/'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
+                <NavbarItem className='dropdown-options' href='/edit/profile'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
                 <NavbarItem onClick={launchModal} className='dropdown-options' ><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
@@ -29,7 +29,7 @@ class CustomNav extends Component {
             <FontAwesomeIcon id='user-circle' icon={['fas', 'user-circle']} />
             <NavbarLink href={'/users/'+userInfo.id} id='nav-dropdown'>{userInfo.username}</NavbarLink>
             <NavbarDropdown>
-                <NavbarItem className='dropdown-options'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
+                <NavbarItem className='dropdown-options' href='/edit/profile'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
                 <NavbarItem onClick={launchModal} className='dropdown-options'><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
