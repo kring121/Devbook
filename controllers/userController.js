@@ -1,4 +1,4 @@
-const { User, Post } = require('../models');
+const { User, Post, Profile } = require('../models');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
@@ -18,9 +18,8 @@ module.exports = {
       const id = Number.parseInt(req.params.id, 10);
       res.locals = await User.findOne({
         where: { id },
-        rejectOnEmpty: true,
         attributes: ['id', 'username', 'name'],
-        include: [{model: Post, where: {user_id: id}}]
+        include: [{model: Post, where: {user_id: id}}, {model: Profile, where: {user_id: id}, attributes: ['pic', 'bio', 'github', 'codepen', 'linkedin', 'website']}]
       });
       next();
     } catch(e) {

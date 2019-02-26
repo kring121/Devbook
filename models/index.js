@@ -89,6 +89,40 @@ const Like = db.define('like', {
   },
 });
 
+const Profile = db.define('profile', {
+  id: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true,
+    unique: true,
+  },
+  pic: {
+    type: Sequelize.STRING(255),
+    allowNull: true,
+  },
+  bio: {
+    type: Sequelize.STRING(128),
+    allowNull: true,
+  },
+  github: {
+    type: Sequelize.STRING(128),
+    allowNull: true,
+  },
+  codepen: {
+    type: Sequelize.STRING(128),
+    allowNull: true,
+  },
+  linkedin: {
+    type: Sequelize.STRING(255),
+    allowNull: true,
+  },
+  website: {
+    type: Sequelize.STRING(255),
+    allowNull: true,
+  }
+})
+
 //associations
 
 User.hasMany(Post);
@@ -99,6 +133,9 @@ Comment.belongsTo(User);
 
 User.hasMany(Like);
 Like.belongsTo(User);
+
+User.hasOne(Profile);
+Profile.belongsTo(User);
 
 Post.hasMany(Comment);
 Comment.belongsTo(Post);
@@ -111,5 +148,6 @@ module.exports = {
   User,
   Post,
   Comment,
-  Like
+  Like,
+  Profile
 }

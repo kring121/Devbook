@@ -12,6 +12,7 @@ import Searchbar from './Searchbar';
 import Dashboard from './Dashboard';
 import LogOut from './LogOut';
 import MobileDashboard from './MobileDashboard';
+import CreateProfile from './CreateProfile';
 import * as auth from './AuthFunctions';
 import 'bulma/css/bulma.css';
 import './style.css';
@@ -19,8 +20,8 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
 import {fab} from "@fortawesome/free-brands-svg-icons";
-import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt } from '@fortawesome/free-solid-svg-icons';
-library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt);
+import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt, faDesktop } from '@fortawesome/free-solid-svg-icons';
+library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt, faDesktop);
 
 class App extends Component {
   constructor(props){
@@ -109,6 +110,7 @@ class App extends Component {
             <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
             <Route exact path='/create/user' component={CreateUser}/>
             <Route exact path='/users' component={Users}/>
+            <Route exact path='/create/profile' component={CreateProfile}/>
             <Columns>
               {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
               <MobileDashboard searchBar={this.searchBar} userId={userInfo.id}/>

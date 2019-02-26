@@ -24,19 +24,25 @@ class CreateUsers extends Component {
         name: nameOfUser,
         email: email,
         password: password,
-      })
-      .then(() => {
+    })
+    .then(() => {
+      axios.post('/users/login',{
+        username: username,
+        password: password
+      }).then((res) => sessionStorage.setItem('jwttoken', res.data.token))
+    })
+    .then(() => {
         this.setState({ fireRedirect: true });
-      })
-      .catch((error) => {
+    })
+    .catch((error) => {
         console.log(error.response.data);
-      });
+    });
   }
 
   render() {
     const { fireRedirect } = this.state;
     if (fireRedirect === true) {
-      return <Redirect to='/users'/>
+      return <Redirect to='/create/profile'/>
     }
     return (
       <div className="create-user">

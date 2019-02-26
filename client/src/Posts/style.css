@@ -79,12 +79,12 @@
   font-size: 30px;
   display: flex;
   justify-content: space-between;
-  color: #363636 !important;
+  color: white !important;
 }
 
 .mobile-dashboard-icons a {
   line-height: 0 !important;
-  color: #363636 !important;
+  color: white !important;
 }
 
 #logout-btns button {
