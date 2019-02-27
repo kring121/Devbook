@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize({
-  database: 'fullstack-app',
-  dialect:  'postgres',
+const url = process.env.DATABASE_URL;
+const db = new Sequelize(url, {
+  // database: 'fullstack-app',
+  // dialect:  'postgres',
   define: {
     underscored: true,
     returning: true,
