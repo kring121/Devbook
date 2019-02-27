@@ -21,7 +21,7 @@ class UserProfile extends Component {
       .then(res => res.data)
       .then(user => this.setState({user: user}))
       .then(userReturned => this.setState({dataReturned: true}))
-      .catch(err => console.log(err.response.data));
+      .catch(err => console.log('error'));
   }
 
   filterInfo(profile){

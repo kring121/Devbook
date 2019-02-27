@@ -19,7 +19,7 @@ module.exports = {
       res.locals = await User.findOne({
         where: { id },
         attributes: ['id', 'username', 'name'],
-        include: [{model: Post, where: {user_id: id}}, {model: Profile, where: {user_id: id}, attributes: ['pic', 'bio', 'github', 'codepen', 'linkedin', 'website']}]
+        include: [{model: Post, where: {user_id: id}, required: false}, {model: Profile, where: {user_id: id}, attributes: ['pic', 'bio', 'github', 'codepen', 'linkedin', 'website'], required: false}]
       });
       next();
     } catch(e) {
