@@ -1,4 +1,4 @@
-const { User, Profile } = require('../models');
+const { User, Profile, Like, Comment, Post } = require('../models');
 
 module.exports = {
   async create(req, res, next) {
@@ -30,6 +30,30 @@ module.exports = {
         returning: true,
       });
       res.locals = updatedProfile;
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  async destroy(req, res, next) {
+    try {
+      const user_id = req.userId;
+      await Like.destroy({
+        where: { user_id },
+      });
+      await Post.destroy({
+        where: { user_id }
+      });
+      await Comment.destroy({
+        where: { user_id }
+      });
+      await Profile.destroy({
+        where: { user_id }
+      });
+      await User.destroy({
+        where: { id: user_id }
+      });
       next();
     } catch (e) {
       next(e);

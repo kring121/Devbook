@@ -7,6 +7,7 @@ const profileRouter = express.Router();
 
 profileRouter.route('/')
   .post(users.verifyToken, profiles.create, views.showUsers)
-  .put(users.verifyToken, profiles.update, views.showUser);
+  .put(users.verifyToken, profiles.update, views.showUser)
+  .delete(users.verifyToken, profiles.destroy, views.showUser)
 
 module.exports = profileRouter;
