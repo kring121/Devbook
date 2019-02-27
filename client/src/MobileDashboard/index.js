@@ -1,12 +1,30 @@
 import React, { Component } from 'react';
+import * as auth from '../AuthFunctions';
+import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink, Container, Navbar, NavbarStart, NavbarItem } from 'bloomer';
 
 class MobileDashboard extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      userInfo: {},
+      dataReturned: false
+    }
+  }
+  componentDidMount(){
+    auth.setHeader();
+    axios.get('/check')
+    .then(res => res.data)
+    .then(userInfo => this.setState({userInfo: userInfo}))
+    .then(dataReturned => this.setState({dataReturned: true}))
+    .catch(err => console.log(err.response.data))
+  }
 
   render() {
-    const { searchBar, userId } = this.props;
+    const { searchBar } = this.props;
+    const { userInfo, dataReturned } = this.state;
     return (
       <Navbar className='mobile-dashboard' isHidden='desktop' isHidden='tablet' hasTextAlign='centered'>
         <NavbarStart>
@@ -15,7 +33,7 @@ class MobileDashboard extends Component {
           <Link to='/posts'><FontAwesomeIcon icon={['fas', 'home']}/></Link>
           <FontAwesomeIcon onClick={searchBar} icon={['fas', 'search']}/>
           <Link to='/create/post'><FontAwesomeIcon icon={['fas', 'plus-square']}/></Link>
-          <Link to={'/users/' + userId}><FontAwesomeIcon icon={['fas', 'user']}/></Link>
+          { dataReturned ? <Link to={'/users/' + userInfo.id}><FontAwesomeIcon icon={['fas', 'user']}/></Link> : null}
         </div>
         </NavbarItem>
         </NavbarStart>

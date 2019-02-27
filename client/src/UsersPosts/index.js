@@ -86,7 +86,7 @@ class UsersPosts extends Component {
     return (
       <div>
         <div className="posts">
-            {posts.reverse().map((post) =>
+            {posts.sort(function(a,b){return b.id - a.id}).map((post) =>
               <div className='post' key={'post-' + post.id}>
                 <PostComponent username={username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={nameOfUser} postId={post.id} userId={userId}/>
               </div>

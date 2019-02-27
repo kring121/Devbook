@@ -118,7 +118,7 @@ class App extends Component {
       <BrowserRouter>
         <div className="App">
           { redirectToLogin ? auth.redirectToLogin() : null }
-          { login ? null : <CustomNav userInfo={userInfo} launchModal={this.launchModal}/> }
+          { login ? null : <CustomNav launchModal={this.launchModal}/> }
           <Switch>
             <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
             <Route exact path='/create/user' component={CreateUser}/>
@@ -126,7 +126,7 @@ class App extends Component {
             <Route exact path='/create/profile' component={CreateProfile}/>
             <Columns>
               {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
-              <MobileDashboard searchBar={this.searchBar} userId={userInfo.id}/>
+              <MobileDashboard searchBar={this.searchBar}/>
               <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}} className='large-column'>
                 <Searchbar searchbar={searchbar} possibleSearch={possibleSearch} searchUser={this.searchUser} suggestedUsers={this.suggestedUsers}/>
                 <Route exact path='/users/:userId' component={UserProfile}/>
@@ -134,7 +134,7 @@ class App extends Component {
                 <Route exact path='/create/post' component={CreatePost}/>
                 <Route exact path='/edit/profile' component={EditProfile}/>
               </Column>
-              <Dashboard searchBar={this.searchBar} userId={userInfo.id}/>
+              <Dashboard searchBar={this.searchBar}/>
             </Columns>
           </Switch>
         </div>

@@ -25,13 +25,13 @@ class CreateUsers extends Component {
         email: email,
         password: password,
     })
-    .then(() => {
+    .then(res => {
       axios.post('/users/login',{
         username: username,
         password: password
-      }).then((res) => sessionStorage.setItem('jwttoken', res.data.token))
+      }).then(res => sessionStorage.setItem('jwttoken', res.data.token))
     })
-    .then(() => {
+    .then(res => {
         this.setState({ fireRedirect: true });
     })
     .catch((error) => {

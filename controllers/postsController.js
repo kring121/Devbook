@@ -4,7 +4,7 @@ module.exports = {
   async index(req, res, next) {
     try {
       res.locals = await Post.findAll({
-        rejectOnEmpty: true,
+        // rejectOnEmpty: true,
         include: [{model: User, attributes: ['id', 'username', 'name']}]
       });
       next()

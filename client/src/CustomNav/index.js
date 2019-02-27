@@ -7,8 +7,22 @@ import { Navbar, NavbarBrand, NavbarItem, NavbarLink, NavbarDropdown, NavbarEnd,
 import './style.css';
 
 class CustomNav extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      userInfo: {}
+    }
+  }
+  componentDidMount(){
+    auth.setHeader();
+    axios.get('/check')
+    .then(res => res.data)
+    .then(userInfo => this.setState({userInfo: userInfo}))
+    .catch(err => console.log(err.response.data))
+  }
   render() {
-    const { userInfo, launchModal } = this.props;
+    const { launchModal } = this.props;
+    const { userInfo } = this.state;
     return (
       <Navbar id='navbar'>
         <NavbarBrand>

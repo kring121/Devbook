@@ -15,10 +15,11 @@ class createProfile extends Component {
   }
 
   componentDidMount(){
-    auth.setHeader()
+
   }
 
   createProfile(e) {
+    auth.setHeader()
     e.preventDefault();
     const bio = (e.target.bio.value === '' ? null : e.target.bio.value);
     const github = (e.target.github.value === '' ? null : e.target.github.value);
