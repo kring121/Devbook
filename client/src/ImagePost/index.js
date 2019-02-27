@@ -52,7 +52,6 @@ class ImagePost extends Component {
     .uploadFile(file, config)
     .then(data => {
       const imageSource = data.location;
-      console.log(imageSource);
       axios.post('/posts', {
         image: imageSource,
         caption: caption,
@@ -134,8 +133,7 @@ uploadSuccess(){
     <Modal isActive>
       <ModalBackground/>
       <ModalContent>
-        <Delete onClick={() => this.setState({waiting: false})}/>
-        <Notification>Upload successful!</Notification>
+        <Notification>Upload successful!<Delete onClick={() => this.setState({waiting: false})}/></Notification>
       </ModalContent>
       <ModalClose onClick={() => this.setState({waiting: false})}/>
     </Modal>
@@ -146,11 +144,9 @@ uploadSuccess(){
     // const { waiting } = this.state;
     switch(condition){
       case true:
-      this.uploadingModal()
-      break;
+      return this.uploadingModal()
       case 'success':
-      this.uploadSuccess()
-      break;
+      return this.uploadSuccess()
       default:
       return null;
     }
