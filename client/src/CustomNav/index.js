@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
 import * as auth from '../AuthFunctions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Navbar, NavbarBrand, NavbarItem, NavbarLink, NavbarDropdown, NavbarEnd, Icon, Field, Input, Control, Button } from 'bloomer';
+import { Navbar, NavbarBrand, NavbarItem, NavbarLink, NavbarDropdown, NavbarEnd } from 'bloomer';
 import './style.css';
 
 class CustomNav extends Component {
@@ -20,6 +19,7 @@ class CustomNav extends Component {
     .then(userInfo => this.setState({userInfo: userInfo}))
     .catch(err => console.log(err.response.data))
   }
+
   render() {
     const { launchModal } = this.props;
     const { userInfo } = this.state;

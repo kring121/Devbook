@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
+import { Field, Control, Input, Button } from 'bloomer';
 
 class Searchbar extends Component {
   render() {

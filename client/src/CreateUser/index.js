@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Field, Input, Button, Control, Label, Title } from 'bloomer';
 import axios from 'axios';
 

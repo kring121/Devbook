@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 // import { Link, Redirect } from 'react-router-dom';
-import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import ImagePost from '../ImagePost';
 import LinkPost from '../LinkPost';
 import './style.css';
-import { Button, Title, Notification, Box, Tabs, TabList, Tab, TabLink } from 'bloomer';
+import { Title, Box, Tabs, TabList, Tab, TabLink } from 'bloomer';
 
 class CreatePost extends Component {
   constructor(props){

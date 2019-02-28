@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import * as auth from '../AuthFunctions';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
+import { Column } from 'bloomer';
 
 class Dashboard extends Component {
   constructor(props){

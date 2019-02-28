@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import PostComponent from '../PostComponent';
-import Searchbar from '../Searchbar';
-import Dashboard from '../Dashboard';
-import MobileDashboard from '../MobileDashboard';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
 
 class UsersPosts extends Component {
-  constructor(props){
-    super(props);
-  }
   componentDidMount(){
     auth.setHeader();
     axios.get('/posts')

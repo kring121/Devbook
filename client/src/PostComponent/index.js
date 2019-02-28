@@ -1,13 +1,10 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import LikeComment from '../LikeComment';
-import {Card, CardHeader, CardHeaderTitle, CardHeaderIcon, CardImage, Image, CardContent, Media, MediaLeft, MediaContent, Title, Subtitle, Content, Container, Notification, Box } from 'bloomer';
+import {Card, CardHeader, CardHeaderTitle, CardImage, Image, CardContent, Media, MediaLeft, MediaContent, Title, Subtitle, Content } from 'bloomer';
 import MicrolinkCard from '@microlink/react'
 
 class PostComponent extends Component {
-  constructor(props){
-    super(props);
-  }
   render() {
     const { username, image, caption, previewLink, nameOfUser, postId, userId } = this.props;
     return(

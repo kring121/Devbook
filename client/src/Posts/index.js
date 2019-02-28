@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import PostComponent from '../PostComponent';
-import Searchbar from '../Searchbar';
-import Dashboard from '../Dashboard';
-import MobileDashboard from '../MobileDashboard';
 import './style.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
 
 class Posts extends Component {
   constructor(props){

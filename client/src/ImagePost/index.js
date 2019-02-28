@@ -5,7 +5,7 @@ import ReactCrop from 'react-image-crop';
 import * as auth from '../AuthFunctions';
 import { image64toCanvasRef, base64StringtoFile, extractImageFileExtensionFromBase64 } from '../ImageHandlingFunctions';
 import 'react-image-crop/dist/ReactCrop.css';
-import { Modal, ModalBackground, ModalContent, ModalClose, Notification, Delete, Title, Field, Input, Control, Button } from 'bloomer';
+import { Modal, ModalBackground, ModalContent, ModalClose, Notification, Delete, Field, Input, Control, Button } from 'bloomer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class ImagePost extends Component {

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Redirect } from 'react-router-dom';
-import ImagePost from '../ImagePost';
+import { Redirect } from 'react-router-dom';
 import { Field, Input, Button, Control, Label, Title, Box } from 'bloomer';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';

@@ -5,7 +5,6 @@ import UserLogin from './UserLogin';
 import Users from './Users';
 import Posts from './Posts';
 import UserProfile from './UserProfile';
-import CreateUser from './CreateUser';
 import CreatePost from './CreatePost';
 import CustomNav from './CustomNav';
 import Searchbar from './Searchbar';
@@ -14,12 +13,12 @@ import LogOut from './LogOut';
 import MobileDashboard from './MobileDashboard';
 import CreateProfile from './CreateProfile';
 import EditProfile from './EditProfile';
+import WithAuth from './WithAuth';
 import * as auth from './AuthFunctions';
 import 'bulma/css/bulma.css';
 import './style.css';
 import { library } from '@fortawesome/fontawesome-svg-core';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink } from 'bloomer';
+import { Columns, Column, Box, Menu, MenuList, MenuLink } from 'bloomer';
 import {fab} from "@fortawesome/free-brands-svg-icons";
 import { faIgloo, faUserCircle, faSearch, faSignOutAlt , faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt, faDesktop } from '@fortawesome/free-solid-svg-icons';
 library.add(faIgloo, fab, faUserCircle, faSearch, faSignOutAlt, faEdit, faHeart, faUpload, faHome, faPlusSquare, faUser, faUsers, faComments, faShareSquare, faShareAlt, faDesktop);
@@ -34,7 +33,6 @@ class App extends Component {
       userInfo: {},
       logout: false,
       login: false,
-      redirectToLogin: false
     }
   this.searchBar = this.searchBar.bind(this);
   this.searchUser = this.searchUser.bind(this);
@@ -42,7 +40,6 @@ class App extends Component {
   this.suggestedUsers = this.suggestedUsers.bind(this);
   this.launchModal = this.launchModal.bind(this);
   this.loginActive = this.loginActive.bind(this);
-  this.fireRedirect = this.fireRedirect.bind(this);
   }
 
   componentDidMount(){
@@ -51,14 +48,6 @@ class App extends Component {
     // .then(res => res.data)
     // .then(userInfo => this.setState({userInfo: userInfo}))
     // .catch(err => this.fireRedirect(err.response.status))
-  }
-
-  fireRedirect(status){
-    if(status === 403) {
-      this.setState({
-        redirectToLogin: true
-      })
-    }
   }
 
   searchBar(){
@@ -113,15 +102,13 @@ class App extends Component {
   }
 
   render() {
-    const { searchbar, possibleSearch, userInfo, logout, login, redirectToLogin } = this.state;
+    const { searchbar, possibleSearch, userInfo, logout, login } = this.state;
     return (
       <BrowserRouter>
         <div className="App">
-          { redirectToLogin ? auth.redirectToLogin() : null }
-          { login ? null : <CustomNav launchModal={this.launchModal}/> }
+          { login === true ? null : <CustomNav launchModal={this.launchModal}/> }
           <Switch>
             <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
-            <Route exact path='/create/user' component={CreateUser}/>
             <Route exact path='/users' component={Users}/>
             <Route exact path='/create/profile' component={CreateProfile}/>
             <Columns>
@@ -129,10 +116,10 @@ class App extends Component {
               <MobileDashboard searchBar={this.searchBar}/>
               <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}} className='large-column'>
                 <Searchbar searchbar={searchbar} possibleSearch={possibleSearch} searchUser={this.searchUser} suggestedUsers={this.suggestedUsers}/>
-                <Route exact path='/users/:userId' component={UserProfile}/>
-                <Route exact path='/posts' component={Posts}/>
-                <Route exact path='/create/post' component={CreatePost}/>
-                <Route exact path='/edit/profile' component={EditProfile}/>
+                <Route exact path='/users/:userId' component={WithAuth(UserProfile)}/>
+                <Route exact path='/posts' component={WithAuth(Posts)}/>
+                <Route exact path='/create/post' component={WithAuth(CreatePost)}/>
+                <Route exact path='/edit/profile' component={WithAuth(EditProfile)}/>
               </Column>
               <Dashboard searchBar={this.searchBar}/>
             </Columns>

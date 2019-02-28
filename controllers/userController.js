@@ -28,10 +28,10 @@ module.exports = {
   },
   async create(req, res, next) {
     try {
-      const { id, username, name, email, password} = req.body;
+      const { username, name, email, password} = req.body;
 
       const newUser = await User.create({
-        id, username, name, email, password
+        username, name, email, password
       });
 
       res.locals = newUser;

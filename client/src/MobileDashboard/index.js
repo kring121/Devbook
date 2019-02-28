@@ -3,7 +3,7 @@ import * as auth from '../AuthFunctions';
 import axios from 'axios';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-import { Columns, Column, Title, Field, Control, Input, Button, Box, Menu, MenuList, MenuLink, Container, Navbar, NavbarStart, NavbarItem } from 'bloomer';
+import { Navbar, NavbarStart, NavbarItem } from 'bloomer';
 
 class MobileDashboard extends Component {
   constructor(props){
