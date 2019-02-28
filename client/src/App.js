@@ -46,11 +46,11 @@ class App extends Component {
   }
 
   componentDidMount(){
-    auth.setHeader();
-    axios.get('/check')
-    .then(res => res.data)
-    .then(userInfo => this.setState({userInfo: userInfo}))
-    .catch(err => this.fireRedirect(err.response.status))
+    // auth.setHeader();
+    // axios.get('/check')
+    // .then(res => res.data)
+    // .then(userInfo => this.setState({userInfo: userInfo}))
+    // .catch(err => this.fireRedirect(err.response.status))
   }
 
   fireRedirect(status){

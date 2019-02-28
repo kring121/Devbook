@@ -15,7 +15,6 @@ class createProfile extends Component {
   }
 
   componentDidMount(){
-
   }
 
   createProfile(e) {

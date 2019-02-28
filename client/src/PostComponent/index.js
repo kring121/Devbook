@@ -18,12 +18,11 @@ class PostComponent extends Component {
             </CardHeaderTitle>
         </CardHeader>
         { image === 'no-image' ?
-          // <MicrolinkCard
-          //   url={previewLink}
-          //   size='large'
-          //   screenshot='true'
-          // />
-          console.log('no-image')
+          <MicrolinkCard
+            url={previewLink}
+            size='large'
+            screenshot='true'
+          />
           :
         <CardImage>
             <Image isRatio='1:1' src={image} />
