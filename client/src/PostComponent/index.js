@@ -11,7 +11,7 @@ class PostComponent extends Component {
       <Card>
         <CardHeader>
             <CardHeaderTitle>
-                <Link className='username-link' to={'/users/'+userId}>{username}</Link>
+                <Link className='username-link' to={{pathname:'/users/'+userId, hash:'#'}}>{username}</Link>
             </CardHeaderTitle>
         </CardHeader>
         { image === 'no-image' ?

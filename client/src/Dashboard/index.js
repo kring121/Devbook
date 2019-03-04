@@ -28,10 +28,10 @@ class Dashboard extends Component {
     return (
       <Column className='dashboard' isHidden='mobile' hasTextAlign='centered'>
         <div className='dashboard-icons'>
-          <Link to='/posts'><FontAwesomeIcon icon={['fas', 'home']}/></Link>
+          <Link to={{pathname:'/posts', hash:'#'}}><FontAwesomeIcon icon={['fas', 'home']}/></Link>
           <FontAwesomeIcon onClick={searchBar} icon={['fas', 'search']}/>
-          <Link to='/create/post'><FontAwesomeIcon icon={['fas', 'plus-square']}/></Link>
-          { dataReturned ? <Link to={'/users/' + userInfo.id }><FontAwesomeIcon icon={['fas', 'user']}/></Link> : null}
+          <Link to={{pathname:'/create/post', hash:'#'}}><FontAwesomeIcon icon={['fas', 'plus-square']}/></Link>
+          { dataReturned ? <Link to={{pathname:'/users/' + userInfo.id, hash:'#'}}><FontAwesomeIcon icon={['fas', 'user']}/></Link> : null}
         </div>
       </Column>
     );

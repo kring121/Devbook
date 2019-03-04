@@ -21,8 +21,8 @@ class Users extends Component {
     return (
       <div className="users">
         <ul>
-          {users.map(user => <Link to={/users/+user.id} key={'linkto'+ user.id}><li key={user.id}>{user.username}</li></Link>)}
-          <Link to='/create/user'><li>Add New User</li></Link>
+          {users.map(user => <Link to={{pathname:/users/+user.id, hash:'#'}} key={'linkto'+ user.id}><li key={user.id}>{user.username}</li></Link>)}
+          <Link to={{pathname:'/create/user', hash:'#'}}><li>Add New User</li></Link>
         </ul>
 
       </div>
