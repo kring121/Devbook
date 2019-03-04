@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, HashRouter } from 'react-router-dom';
 import axios from 'axios';
 import UserLogin from './UserLogin';
 import Users from './Users';
@@ -104,28 +104,30 @@ class App extends Component {
   render() {
     const { searchbar, possibleSearch, userInfo, logout, login } = this.state;
     return (
-      <BrowserRouter>
-        <div className="App">
-          { login === true ? null : <CustomNav launchModal={this.launchModal}/> }
-          <Switch>
-            <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
-            <Route exact path='/users' component={Users}/>
-            <Route exact path='/create/profile' component={CreateProfile}/>
-            <Columns>
-              {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
-              <MobileDashboard searchBar={this.searchBar}/>
-              <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}} className='large-column'>
-                <Searchbar searchbar={searchbar} possibleSearch={possibleSearch} searchUser={this.searchUser} suggestedUsers={this.suggestedUsers}/>
-                <Route exact path='/users/:userId' component={WithAuth(UserProfile)}/>
-                <Route exact path='/posts' component={WithAuth(Posts)}/>
-                <Route exact path='/create/post' component={WithAuth(CreatePost)}/>
-                <Route exact path='/edit/profile' component={WithAuth(EditProfile)}/>
-              </Column>
-              <Dashboard searchBar={this.searchBar}/>
-            </Columns>
-          </Switch>
-        </div>
-      </BrowserRouter>
+      <HashRouter>
+        <BrowserRouter>
+          <div className="App">
+            { login === true ? null : <CustomNav launchModal={this.launchModal}/> }
+            <Switch>
+              <Route exact path='/' render={() => <UserLogin loginActive={this.loginActive}/>}/>
+              <Route exact path='/users' component={Users}/>
+              <Route exact path='/create/profile' component={CreateProfile}/>
+              <Columns>
+                {logout === true ? <LogOut launchModal={this.launchModal}/> : null}
+                <MobileDashboard searchBar={this.searchBar}/>
+                <Column isSize={{desktop:'3/4', mobile: 'full', tablet: '3/4'}} className='large-column'>
+                  <Searchbar searchbar={searchbar} possibleSearch={possibleSearch} searchUser={this.searchUser} suggestedUsers={this.suggestedUsers}/>
+                  <Route exact path='/users/:userId' component={WithAuth(UserProfile)}/>
+                  <Route exact path='/posts' component={WithAuth(Posts)}/>
+                  <Route exact path='/create/post' component={WithAuth(CreatePost)}/>
+                  <Route exact path='/edit/profile' component={WithAuth(EditProfile)}/>
+                </Column>
+                <Dashboard searchBar={this.searchBar}/>
+              </Columns>
+            </Switch>
+          </div>
+        </BrowserRouter>
+      </HashRouter>
     );
   }
 }
