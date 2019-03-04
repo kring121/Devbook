@@ -105,7 +105,7 @@ class App extends Component {
     const { searchbar, possibleSearch, userInfo, logout, login } = this.state;
     return (
       <HashRouter>
-        <BrowserRouter>
+
           <div className="App">
             { login === true ? null : <CustomNav launchModal={this.launchModal}/> }
             <Switch>
@@ -126,7 +126,7 @@ class App extends Component {
               </Columns>
             </Switch>
           </div>
-        </BrowserRouter>
+
       </HashRouter>
     );
   }
