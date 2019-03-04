@@ -47,6 +47,14 @@ app.use('/check', currentRouter);
 app.use('/search', searchRouter);
 app.use('/profile', profileRouter);
 
+// Send all react router requests to client
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, 'client/build'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
