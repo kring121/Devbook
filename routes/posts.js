@@ -9,4 +9,7 @@ postsRouter.route('/')
   .get(users.verifyToken, posts.index, views.showPosts)
   .post(users.verifyToken, posts.create, views.showPosts)
 
+postsRouter.route('/:id')
+  .delete(users.verifyToken, posts.destroy, views.showPosts);
+
 module.exports = postsRouter;

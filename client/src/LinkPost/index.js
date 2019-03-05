@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import { Field, Control, Input, Label, Button } from 'bloomer';
@@ -6,6 +7,9 @@ import { Field, Control, Input, Label, Button } from 'bloomer';
 class LinkPost extends Component {
   constructor(props){
     super(props);
+    this.state = {
+      fireRedirect: false,
+    }
     this.createPost = this.createPost.bind(this);
   }
 
@@ -23,9 +27,15 @@ class LinkPost extends Component {
         caption: caption,
         link: link,
         github: github,
-    }).catch(err => console.log(err.response.data))
+    })
+    .then(res => this.setState({fireRedirect: true}))
+    .catch(err => console.log(err.response.data))
   }
   render() {
+    const { fireRedirect } = this.state;
+    if (fireRedirect === true) {
+      return <Redirect to='/posts'/>
+    }
     return (
       <div className="link-post">
         <form onSubmit={this.createPost}>

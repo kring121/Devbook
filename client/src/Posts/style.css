@@ -97,3 +97,12 @@
   margin: 15px 10px 5px 10px !important;
 }
 
+.delete::before, .delete::after {
+  background: #363636 !important;
+}
+
+.delete {
+  background: transparent !important;
+}
+
+

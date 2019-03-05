@@ -1,18 +1,26 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import LikeComment from '../LikeComment';
-import {Card, CardHeader, CardHeaderTitle, CardImage, Image, CardContent, Media, MediaLeft, MediaContent, Title, Subtitle, Content } from 'bloomer';
+import {Card, CardHeader, CardHeaderTitle, CardImage, Image, CardContent, Media, MediaLeft, MediaContent, Title, Subtitle, Content, Delete } from 'bloomer';
 import MicrolinkCard from '@microlink/react'
 
 class PostComponent extends Component {
+  handleDelete(postId) {
+    // const { removePost } = this.props
+    // removePost(postId);
+    axios.delete('/posts/'+postId)
+    .catch(err => console.log(err.response.data))
+  }
   render() {
-    const { username, image, caption, previewLink, nameOfUser, postId, userId } = this.props;
+    const { username, image, caption, previewLink, nameOfUser, postId, userId, currentUser } = this.props;
     return(
       <Card>
         <CardHeader>
             <CardHeaderTitle>
                 <Link className='username-link' to={{pathname:'/users/'+userId, hash:'#'}}>{username}</Link>
             </CardHeaderTitle>
+            {currentUser === userId ? <Delete isSize='medium' onClick={() => this.handleDelete(postId)}/> : null}
         </CardHeader>
         { image === 'no-image' ?
           <MicrolinkCard

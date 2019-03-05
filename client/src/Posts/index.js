@@ -8,7 +8,8 @@ class Posts extends Component {
   constructor(props){
     super(props);
     this.state = {
-      posts: []
+      posts: [],
+      userInfo: {}
     }
   }
   componentDidMount(){
@@ -19,6 +20,10 @@ class Posts extends Component {
     axios.get('/check/likes')
       .then(res => res.data)
       .then(likes => this.setState({liked: likes}))
+      .catch(err => console.log(err));
+    axios.get('/check')
+      .then(res => res.data)
+      .then(userInfo => this.setState({userInfo: userInfo}))
       .catch(err => console.log(err));
   }
 
@@ -80,13 +85,13 @@ class Posts extends Component {
   }
 
   render() {
-    const { posts } = this.state;
+    const { posts, userInfo } = this.state;
     return (
       <div>
         <div className="posts">
             {posts.reverse().map((post) =>
               <div className='post' key={'post-' + post.id}>
-                <PostComponent username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
+                <PostComponent currentUser={userInfo.id} username={post.user.username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={post.user.name} postId={post.id} userId={post.user_id}/>
               </div>
             )}
         </div>

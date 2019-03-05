@@ -93,7 +93,7 @@ class LikeComment extends Component {
         { viewComments ?
           comments.map((comment) =>
           <div className='comment' key={'comment'+comment.id}>
-            <Title isSize={6}><Link className='username-link' to={{pahtname:'/users/' + comment.user_id, hash:'#'}}>{comment.user.username}</Link></Title>
+            <Title isSize={6}><Link className='username-link' to={{pathname:'/users/' + comment.user_id, hash:'#'}}>{comment.user.username}</Link></Title>
             <Subtitle className='comment-content' isSize={6}>{comment.content}</Subtitle>
           </div>)
           : null }

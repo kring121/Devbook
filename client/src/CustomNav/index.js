@@ -34,7 +34,7 @@ class CustomNav extends Component {
             <NavbarLink href={'#/users/'+userInfo.id} id='nav-dropdown'>{userInfo.username}</NavbarLink>
             <NavbarDropdown>
                 <NavbarItem className='dropdown-options' href='#/edit/profile'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
-                <NavbarItem onClick={launchModal} className='dropdown-options' ><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
+                <NavbarItem onClick={() => launchModal(true)} className='dropdown-options' ><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
         </NavbarBrand>
@@ -44,7 +44,7 @@ class CustomNav extends Component {
             <NavbarLink href={'#/users/'+userInfo.id} id='nav-dropdown'>{userInfo.username}</NavbarLink>
             <NavbarDropdown>
                 <NavbarItem className='dropdown-options' href='#/edit/profile'><FontAwesomeIcon className='drop-icon' icon={['fas', 'edit']}/>Edit Profile</NavbarItem>
-                <NavbarItem onClick={launchModal} className='dropdown-options'><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
+                <NavbarItem onClick={() => launchModal(true)} className='dropdown-options'><FontAwesomeIcon className='drop-icon' icon={['fas', 'sign-out-alt']}/>Log Out</NavbarItem>
             </NavbarDropdown>
           </NavbarItem>
         </NavbarEnd>

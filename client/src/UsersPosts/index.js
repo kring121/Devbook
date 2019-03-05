@@ -1,9 +1,17 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import axios from 'axios';
 import * as auth from '../AuthFunctions';
 import PostComponent from '../PostComponent';
 
 class UsersPosts extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      userInfo: {}
+    }
+    this.handlePostDelete = this.handlePostDelete.bind(this);
+  }
   componentDidMount(){
     auth.setHeader();
     axios.get('/posts')
@@ -12,6 +20,10 @@ class UsersPosts extends Component {
     axios.get('/check/likes')
       .then(res => res.data)
       .then(likes => this.setState({liked: likes}))
+      .catch(err => console.log(err));
+    axios.get('/check')
+      .then(res => res.data)
+      .then(userInfo => this.setState({userInfo: userInfo}))
       .catch(err => console.log(err));
   }
 
@@ -72,14 +84,22 @@ class UsersPosts extends Component {
     }
   }
 
+  handlePostDelete(postId){
+    const { posts } = this.state;
+    this.setState({posts: posts.filter(function(element) {
+        return element.id !== postId
+    })})
+  }
+
   render() {
+    const { userInfo } = this.state;
     const { posts, userId, username, nameOfUser } = this.props;
     return (
       <div>
         <div className="posts">
             {posts.sort(function(a,b){return b.id - a.id}).map((post) =>
               <div className='post' key={'post-' + post.id}>
-                <PostComponent username={username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={nameOfUser} postId={post.id} userId={userId}/>
+                <PostComponent username={username} caption={post.caption} image={post.image !== null ? post.image : 'no-image'} previewLink={post.link} nameOfUser={nameOfUser} postId={post.id} userId={userId} currentUser={userInfo.id} removePost={this.handlePostDelete}/>
               </div>
             )}
         </div>

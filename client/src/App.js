@@ -88,13 +88,14 @@ class App extends Component {
     )
   }
 
-  launchModal() {
-    const { logout } = this.state;
-    if ( logout === false) {
-      this.setState({logout: true})
-    } else {
-      this.setState({logout: false})
-    }
+  launchModal(boolean) {
+    // const { logout } = this.state;
+    // if ( logout === false) {
+    //   this.setState({logout: true})
+    // } else {
+    //   this.setState({logout: false})
+    // }
+    this.setState({logout: boolean})
   }
 
   loginActive(trueOrFalse) {

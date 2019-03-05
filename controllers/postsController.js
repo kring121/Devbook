@@ -28,5 +28,18 @@ module.exports = {
     } catch(e) {
       next(e)
     }
-  }
+  },
+
+  async destroy(req, res, next) {
+    try {
+      const id = Number.parseInt(req.params.id, 10);
+      await Post.destroy({
+        where: { id },
+      });
+      next();
+    } catch (e) {
+      next(e);
+    }
+  },
+
 }

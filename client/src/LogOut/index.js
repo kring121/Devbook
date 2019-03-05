@@ -33,11 +33,11 @@ class LogOut extends Component {
             <Title>Are you sure you want to logout?</Title>
             <div id='logout-btns'>
               <Button isColor='success' onClick={this.logOutUser}>Yes</Button>
-              <Button isColor='danger' onClick={launchModal}>No</Button>
+              <Button isColor='danger' onClick={() => launchModal(false)}>No</Button>
             </div>
           </Box>
         </ModalContent>
-        <ModalClose onClick={launchModal}/>
+        <ModalClose onClick={() => launchModal(false)}/>
       </Modal>
     );
   }
